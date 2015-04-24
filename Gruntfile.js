@@ -28,9 +28,8 @@ module.exports = function (grunt) {
 				cwd: "<%=_src%>/",
 				dest: "<%=_dist%>/",
 				src: [
-					"*.html",
-					"*.css",
-					"fonts/*"
+					"**/*",
+					"!scripts"
 				]
 			}
 		},
@@ -62,9 +61,8 @@ module.exports = function (grunt) {
 			},
 			base: {
 				files: [
-					"<%=_src%>/*.html",
-					"<%=_src%>/*.css",
-					"<%=_src%>/fonts/*"
+					"<%=_src%>/**/*",
+					"!<%=_src%>/scripts"
 				],
 				tasks: "newer:copy"
 			},
