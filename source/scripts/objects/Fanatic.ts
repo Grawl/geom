@@ -6,7 +6,7 @@ module Geom{
 
         constructor(private _level:number, startX:number, startY:number){
             super(startX, startY, Constants.FanaticStartPixels - 1.5 * _level, Constants.FanaticStartPixels - 1.5*_level);
-            this.color = ex.Color.Red;
+            this.color = Constants.FanaticColor;
             this._health = 1;
         }
 
