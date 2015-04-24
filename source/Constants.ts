@@ -5,7 +5,10 @@ module Geom{
         public static TempleStartPixels = 20;
 
         public static FanaticHp = 1;
+        public static FanaticStartPixels = 30;
 
         public static HolyHpPerLevel = 5;
+        public static HolyPixelsPerLevel = 5;
+        public static HolyStartPixels = 10;
     }
 }
