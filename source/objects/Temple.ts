@@ -1,20 +1,12 @@
 /// <reference path="../references.d.ts"/>
+/// <reference path="BaseObject.ts"/>
 
 module Geom{
-   export class Temple extends ex.Actor{
-       private _health:number;
+   export class Temple extends Geom.BaseObject{
 
-       constructor(private _level:number){
-          super();
-          this._health = _level * Constants.TempleHpPerLevel;
-       }
-
-       public update(engine: ex.Engine, delta: number) {
-           super.update(engine, delta); // call base update logic
-
-           if (this._health <= 0) {
-               // Destroy actor
-           }
+       constructor(private _level:number, startX:number, startY:number){
+          super(startX, startY, _level*Constants.TemplePixelsPerLevel,_level*Constants.TemplePixelsPerLevel);
+          this._health = (_level - 1)* Constants.TempleHpPerLevel + Constants.TempleStartPixels;
        }
    }
 }
