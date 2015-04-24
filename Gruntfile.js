@@ -9,16 +9,21 @@ module.exports = function (grunt) {
 		_src_ts: "<%=_src%>/scripts",
 		_src_ts_files: "<%=_src%>/scripts/**/*.ts",
 		_dist_ts: "<%=_dist%>/scripts",
-		typescript: {
+		tsc: {
 			build: {
-				src: "<%=_src_ts_files%>",
-				dest: "<%=_dist_ts%>",
+				files: [{
+					expand: true,
+					dest: "<%=_dist_ts%>",
+					cwd: "<%=_src_ts%>",
+					ext: ".js",
+					src: [
+						"**/*.ts",
+						"!*.d.ts"
+					]
+				}],
 				options: {
-					basePath: "<%=_src_ts%>/",
-					sourceMap: true,
-					module: 'amd',
-					target: 'es5',
-					declaration: true
+					target: "ES5",
+					sourcemap: true
 				}
 			}
 		},
@@ -61,7 +66,7 @@ module.exports = function (grunt) {
 		watch: {
 			typescript: {
 				files: "<%=_src_ts_files%>",
-				tasks: "typescript"
+				tasks: "tsc"
 			},
 			base: {
 				files: [
@@ -80,7 +85,7 @@ module.exports = function (grunt) {
 		[
 			"bower",
 			"copy",
-			"typescript"
+			"tsc"
 		]
 	);
 	grunt.registerTask("default", [
