@@ -1,3 +1,4 @@
+@import url("vendor/reset.css");
 @font-face {
 	font-family: 'Proxima Nova Extra Condensed Thin';
 	src: url('fonts/Proxima-Nova-Extra-Condensed-Thin.woff') format('woff');
@@ -8,4 +9,8 @@ body {
 	font-family: 'Proxima Nova Extra Condensed Thin', "Helvetica Neue", Helvetica, Arial, sans-serif;
 	color: white;
 	background: black;
+}
+canvas {
+	margin: 0 auto;
+	display: block;
 }
