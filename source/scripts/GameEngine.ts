@@ -9,6 +9,8 @@ module Geom{
         private _templeLevel = 1;
         private _fanaticLevel = 1;
         private _holyLevel = 1;
+        private _startPoint=null;
+
         constructor(){
             this._engine = new ex.Engine(800, 600);
         }
@@ -21,18 +23,58 @@ module Geom{
             this._engine.start();
         }
 
+        private getNextStartPoint(){
+            if (!this._startPoint)
+            {
+                this._startPoint= new ex.Point(this._engine.width/2,this._engine.height/2);
+                return;
+            }
+            // Точка, принадлежащая одной из фигур, притом находящаяся ближе к краю, чем к центру всех фигур
+
+            // Сначала просто принадлежащая одной из фигур
+            // Рандомная точка
+
+            var index = Math.floor(Math.random() * this._engine.rootScene.children.length);
+            var figure = this._engine.rootScene.children[index];
+
+            var signX = Math.random() * 10 % 2;
+            var signY = Math.random() * 10 % 2;
+
+            var x = signX?figure.x + Math.random()*figure.getWidth(): figure.x - Math.random()*figure.getWidth();
+            var y = signY?figure.y + Math.random()*figure.getHeight(): figure.y - Math.random()*figure.getHeight();
+
+            this._startPoint = new ex.Point(x,y);
+            return;
+
+            for(var i=this._engine.rootScene.children.length-1;i>=0;i--){
+                // Бежим от последних фигур к первой. На каждую фигуру 2 попытки
+
+
+            }
+        }
+
         private initializeBuildingEvents(){
-            this._engine.on('keydown', (event:ex.KeyEvent)=>{
+            this._engine.on('keydown', (event:any)=>{
+               this.getNextStartPoint();
+
                switch (event.key){
                    case ex.InputKey.Q:
-                       this._engine.addChild(new Temple(this._templeLevel, 50,50));
+                       this._engine.addChild(new Temple(this._templeLevel, this._startPoint.x, this._startPoint.y));
                        break;
                    case ex.InputKey.W:
-                       this._engine.addChild(new Fanatic(this._fanaticLevel, 200,200));
+                       this._engine.addChild(new Fanatic(this._fanaticLevel, this._startPoint.x, this._startPoint.y));
                        break;
                    case ex.InputKey.E:
-                       this._engine.addChild(new Holy(this._holyLevel, 300,300));
+                       this._engine.addChild(new Holy(this._holyLevel, this._startPoint.x, this._startPoint.y));
                        break;
+                   case ex.InputKey.C:
+                       var scene = this._engine.rootScene;
+
+                       for(var i=0;i<scene.children.length;i++){
+                           scene.children[i].die();
+                       }
+
+                       this._startPoint = null;
                }
             });
         }
