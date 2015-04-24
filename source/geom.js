@@ -30,11 +30,15 @@ function initialize(){
         requestAnimationFrame( animate );
         count += 0.05;
         graphics.clear();
-        graphics.lineStyle(1, 0xFF0000);
+
+        graphics.beginFill(0xFF0000,1);
 
         // rectangle
         graphics.drawRect(200 + 50*Math.sin(count),200 + 50*Math.cos(count),200 + 50*Math.sin(count),200 + 50*Math.cos(count));
 
+        graphics.endFill();
+
+        graphics.beginFill(0x00FF00,1);
         //triangle
         graphics.drawPolygon([
                 400 + 50*Math.sin(count),400 + 50*Math.cos(count),
@@ -42,10 +46,13 @@ function initialize(){
                 500 + 50*Math.sin(count),600 + 50*Math.cos(count),
                 400 + 50*Math.sin(count),400 + 50*Math.cos(count)
         ]);
+        graphics.endFill();
 
+        graphics.beginFill(0x0000FF);
         //circle
         graphics.drawCircle(300 + 50*Math.sin(count),300 + 50*Math.cos(count),50);
 
+        graphics.endFill();
 //        tilingSprite.tileScale.x = 2 + Math.sin(count);
 //        tilingSprite.tileScale.y = 2 + Math.cos(count);
 
