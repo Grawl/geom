@@ -58,7 +58,7 @@ module.exports = function (grunt) {
 		watch: {
 			typescript: {
 				files: "<%=_src_ts_files%>",
-				tasks: "typescript"
+				tasks: "newer:typescript"
 			},
 			base: {
 				files: [
@@ -66,7 +66,7 @@ module.exports = function (grunt) {
 					"<%=_src%>/*.css",
 					"<%=_src%>/fonts/*"
 				],
-				tasks: "copy"
+				tasks: "newer:copy"
 			},
 			options: {
 				livereload: true
