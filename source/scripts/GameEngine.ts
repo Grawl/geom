@@ -35,8 +35,12 @@ module Geom{
             // Сначала просто принадлежащая одной из фигур
             // Рандомная точка
 
-            var index = Math.floor(Math.random() * this._engine.rootScene.children.length);
-            var figure = this._engine.rootScene.children[index];
+            var children = _.filter(this._engine.rootScene.children,
+                ch => ch instanceof Temple || ch instanceof Fanatic || ch instanceof Holy
+            );
+
+            var index = Math.floor(Math.random() * children.length);
+            var figure = children[index];
 
             var signX = Math.random() * 10 % 2;
             var signY = Math.random() * 10 % 2;

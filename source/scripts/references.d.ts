@@ -3,3 +3,4 @@
 
 declare function require(arg1,arg2);
 declare var requirejs;
+declare var _;

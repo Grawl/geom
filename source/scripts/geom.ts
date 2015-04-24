@@ -9,10 +9,11 @@ module Geom {
             vendor:'../vendor'
         },
         shim:{
-           'objects/BaseObject':['vendor/excalibur-0.2.2'],
+           'objects/BaseObject':['vendor/excalibur-0.2.2','vendor/lodash'],
            'Constants':['vendor/excalibur-0.2.2'],
            'objects/Temple':['objects/BaseObject','Constants'],
-           'objects/Fanatic':['objects/BaseObject','Constants'],
+           'objects/FanaticShoot':['objects/BaseObject','Constants'],
+           'objects/Fanatic':['objects/FanaticShoot'],
            'objects/Holy':['objects/BaseObject','Constants'],
            'GameEngine':['objects/Temple','objects/Fanatic','objects/Holy']
         }
