@@ -10,6 +10,7 @@ module Geom {
         },
         shim:{
            'objects/BaseObject':['vendor/excalibur-0.2.2'],
+           'Constants':['vendor/excalibur-0.2.2'],
            'objects/Temple':['objects/BaseObject','Constants'],
            'objects/Fanatic':['objects/BaseObject','Constants'],
            'objects/Holy':['objects/BaseObject','Constants'],
