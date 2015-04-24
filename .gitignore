@@ -1,1 +1,4 @@
 
+source/*.js
+source/objects/*.js
+*.map
