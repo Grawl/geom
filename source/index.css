@@ -1,0 +1,9 @@
+@font-face {
+	font-family: 'Proxima Nova Extra Condensed Thin';
+	src: url('fonts/Proxima-Nova-Extra-Condensed-Thin.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+body {
+	font-family: 'Proxima Nova Extra Condensed Thin', "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
