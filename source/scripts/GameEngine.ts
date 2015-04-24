@@ -13,6 +13,7 @@ module Geom{
 
         constructor(){
             this._engine = new ex.Engine(800, 600);
+			this._engine.backgroundColor = ex.Color.fromHex('#000000');
         }
 
         public initialize(){
