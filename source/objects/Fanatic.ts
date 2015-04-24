@@ -5,7 +5,7 @@ module Geom{
     export class Fanatic extends Geom.BaseObject{
 
         constructor(private _level:number, startX:number, startY:number){
-            super(startX, startY, Constants.FanaticStartPixels - 1.5*this._level,Constants.FanaticStartPixels - 1.5*this._level);
+            super(startX, startY, Constants.FanaticStartPixels - 1.5 * _level, Constants.FanaticStartPixels - 1.5*_level);
             this.color = ex.Color.Red;
             this._health = 1;
         }
