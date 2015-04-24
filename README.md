@@ -1,6 +1,6 @@
-# Geom
+# Геом
 
-## Game for VLH III
+## Игра для Vladivostok Hackathon III
 
 ### TODO:
 
