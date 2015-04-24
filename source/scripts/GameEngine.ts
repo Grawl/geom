@@ -6,9 +6,6 @@
 module Geom{
     export class GameEngine{
         private _engine:GeomEngine;
-        private _templeLevel = 1;
-        private _fanaticLevel = 1;
-        private _holyLevel = 1;
         private _startPoint=null;
 
         constructor(){
@@ -65,21 +62,21 @@ module Geom{
                    case ex.InputKey.Q:
                        if (this._engine.faith>=Constants.TempleFaithCost)
                        {
-                           this._engine.addChild(new Temple(this._templeLevel, this._startPoint.x, this._startPoint.y));
+                           this._engine.addChild(new Temple(this._engine.templeLevel, this._startPoint.x, this._startPoint.y));
                            this._engine.faith-=Constants.TempleFaithCost;
                        }
                        break;
                    case ex.InputKey.W:
-                       if (this._engine.faith>=Constants.FanaticFaithCost)
+                       if (this._engine.faith>=Constants.FanaticFaithCost && this._engine.getFanaticLimit()>0)
                        {
-                           this._engine.addChild(new Fanatic(this._fanaticLevel, this._startPoint.x, this._startPoint.y));
+                           this._engine.addChild(new Fanatic(this._engine.fanaticLevel, this._startPoint.x, this._startPoint.y));
                            this._engine.faith-=Constants.FanaticFaithCost;
                        }
                        break;
                    case ex.InputKey.E:
-                       if (this._engine.faith>=Constants.HolyFaithCost)
+                       if (this._engine.faith>=Constants.HolyFaithCost && this._engine.getHolyLimit() > 0)
                        {
-                           this._engine.addChild(new Holy(this._holyLevel, this._startPoint.x, this._startPoint.y));
+                           this._engine.addChild(new Holy(this._engine.holyLevel, this._startPoint.x, this._startPoint.y));
                            this._engine.faith-=Constants.HolyFaithCost;
                        }
                        break;
