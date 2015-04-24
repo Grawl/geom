@@ -8,5 +8,20 @@
 <body>
 <script src="vendor/require.js"></script>
 <script type="text/javascript" src="scripts/geom.js"></script>
+<script>
+	var counter = 50;
+	function addLabel() {
+		var label = new ex.Label();
+		var position = 50 + counter;
+		label.x = position * Math.random();
+		label.y = position * Math.random();
+		label.text = "Foo";
+		label.color = ex.Color.White;
+		label.rotateBy(Math.random(), 100);
+		Geom.gameEngine._engine.addChild(label);
+		counter += 20;
+	}
+</script>
+<button type="button" onclick="addLabel()">addLabel()</button>
 </body>
 </html>

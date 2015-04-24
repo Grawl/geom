@@ -19,6 +19,17 @@ module.exports = function (grunt) {
 				}
 			}
 		},
+		postcss: {
+			build: {
+				options: {
+					processors: [
+						require('autoprefixer-core').postcss
+					],
+					map: true
+				},
+				src: '<%=_dist%>/*.css'
+			}
+		},
 		clean: {
 			build: "build"
 		},
@@ -59,9 +70,14 @@ module.exports = function (grunt) {
 				files: "<%=_src_ts_files%>",
 				tasks: "newer:typescript"
 			},
+			css: {
+				files: "<%=_src%>/*.css",
+				tasks: "postcss"
+			},
 			base: {
 				files: [
 					"<%=_src%>/**/*",
+					"!<%=_src%>/*.css",
 					"!<%=_src%>/scripts"
 				],
 				tasks: "newer:copy"
@@ -75,7 +91,8 @@ module.exports = function (grunt) {
 		[
 			"bower",
 			"copy",
-			"typescript"
+			"typescript",
+			"postcss"
 		]
 	);
 	grunt.registerTask("default", [
