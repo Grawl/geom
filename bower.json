@@ -4,7 +4,8 @@
   "repository": "http://github.com/grawl/geom",
   "dependencies": {
     "requirejs": "~2.1.11",
-    "excalibur": "~0.2.2"
+    "excalibur": "~0.2.2",
+    "reset-css": "~2.0.20110126"
   },
   "devDependencies": {}
 }
