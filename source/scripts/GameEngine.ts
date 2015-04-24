@@ -5,14 +5,14 @@
 
 module Geom{
     export class GameEngine{
-        private _engine:ex.Engine;
+        private _engine:GeomEngine;
         private _templeLevel = 1;
         private _fanaticLevel = 1;
         private _holyLevel = 1;
         private _startPoint=null;
 
         constructor(){
-            this._engine = new ex.Engine(800, 600);
+            this._engine = new GeomEngine(800, 600);
 			this._engine.backgroundColor = ex.Color.fromHex('#000000');
         }
 

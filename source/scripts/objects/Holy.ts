@@ -22,6 +22,10 @@ module Geom{
             ctx.closePath();
             ctx.fill();
         }
+
+        public update(engine:GeomEngine, delta:number){
+            engine.faith+=2*this._level;
+        }
     }
 }
 

@@ -36,10 +36,12 @@ module Geom{
             ctx.fill();
         }
 
-        public update(engine: ex.Engine, delta: number){
+        public update(engine: GeomEngine, delta: number){
             // Проверяем, есть ли у нас свободные углы и стреляем одним из них
 
             // Сначала стреляем всеми свободными
+
+            engine.faith+=0.3 *this._level;
 
             if (this._cooldown>0)
             {
@@ -47,21 +49,25 @@ module Geom{
                 return;
             }
 
+
             // Из первой точки влево
             if (this.pointIsFree(this.x,this.y,engine.rootScene))
             {
                 engine.addChild(new FanaticShoot(this.x, this.y, ex.Side.Left));
+                engine.faith -= 1;
             }
 
             // Из второй точки вправо
             if (this.pointIsFree(this._secondPoint.x,this._secondPoint.y,engine.rootScene))
             {
                 engine.addChild(new FanaticShoot(this._secondPoint.x, this._secondPoint.y, ex.Side.Right));
+                engine.faith -= 1;
             }
             // Из третьей точки вверх
             if (this.pointIsFree(this._thirdPoint.x,this._thirdPoint.y,engine.rootScene))
             {
                 engine.addChild(new FanaticShoot(this._thirdPoint.x, this._thirdPoint.y, ex.Side.Top));
+                engine.faith -= 1;
             }
 
             this.resetCooldown();

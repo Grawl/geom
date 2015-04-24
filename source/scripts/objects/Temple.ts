@@ -11,5 +11,9 @@ module Geom{
 
            this._health = _level * Constants.TempleHpPerLevel;
        }
+
+       public update(engine:GeomEngine, delta:number){
+           engine.faith+=5*this._level;
+       }
    }
 }
