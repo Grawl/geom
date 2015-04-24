@@ -1,4 +1,4 @@
-# Geom readme
+# Geom
 
 ## Game for VLH III
 
