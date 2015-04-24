@@ -61,16 +61,27 @@ module Geom{
         private initializeBuildingEvents(){
             this._engine.on('keydown', (event:any)=>{
                this.getNextStartPoint();
-
                switch (event.key){
                    case ex.InputKey.Q:
-                       this._engine.addChild(new Temple(this._templeLevel, this._startPoint.x, this._startPoint.y));
+                       if (this._engine.faith>=Constants.TempleFaithCost)
+                       {
+                           this._engine.addChild(new Temple(this._templeLevel, this._startPoint.x, this._startPoint.y));
+                           this._engine.faith-=Constants.TempleFaithCost;
+                       }
                        break;
                    case ex.InputKey.W:
-                       this._engine.addChild(new Fanatic(this._fanaticLevel, this._startPoint.x, this._startPoint.y));
+                       if (this._engine.faith>=Constants.FanaticFaithCost)
+                       {
+                           this._engine.addChild(new Fanatic(this._fanaticLevel, this._startPoint.x, this._startPoint.y));
+                           this._engine.faith-=Constants.FanaticFaithCost;
+                       }
                        break;
                    case ex.InputKey.E:
-                       this._engine.addChild(new Holy(this._holyLevel, this._startPoint.x, this._startPoint.y));
+                       if (this._engine.faith>=Constants.HolyFaithCost)
+                       {
+                           this._engine.addChild(new Holy(this._holyLevel, this._startPoint.x, this._startPoint.y));
+                           this._engine.faith-=Constants.HolyFaithCost;
+                       }
                        break;
                    case ex.InputKey.C:
                        var scene = this._engine.rootScene;
@@ -80,7 +91,9 @@ module Geom{
                        }
 
                        this._startPoint = null;
+                       this._engine.resetFaith();
                }
+               console.log(this._engine.faith);
             });
         }
 

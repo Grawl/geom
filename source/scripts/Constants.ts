@@ -18,6 +18,15 @@ module Geom{
 		public static TempleColor = ex.Color.fromHex('#653459');
 		public static FanaticColor = ex.Color.fromHex('#ED1C24');
 		public static HolyColor = ex.Color.fromHex('#03BAB3');
+
+        public static TempleFaithCost = 30;
+        public static FanaticFaithCost = 15;
+        public static HolyFaithCost = 60;
+
+        public static StartFaith = 45;
+
+        public static TempleCooldown = 120;
+        public static HolyCooldown = 180;
     }
 
 }

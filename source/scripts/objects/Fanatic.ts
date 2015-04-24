@@ -40,15 +40,21 @@ module Geom{
             // Проверяем, есть ли у нас свободные углы и стреляем одним из них
 
             // Сначала стреляем всеми свободными
+            if (!this._cooldown)
+            {
+                engine.faith+=0.3 *this._level;
+            }
 
-            engine.faith+=0.3 *this._level;
+            if (!engine.hasTemple())
+            {
+                return;
+            }
 
             if (this._cooldown>0)
             {
                 this._cooldown--;
                 return;
             }
-
 
             // Из первой точки влево
             if (this.pointIsFree(this.x,this.y,engine.rootScene))

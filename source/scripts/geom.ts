@@ -15,7 +15,9 @@ module Geom {
            'objects/FanaticShoot':['objects/BaseObject','Constants'],
            'objects/Fanatic':['objects/FanaticShoot'],
            'objects/Holy':['objects/BaseObject','Constants'],
-           'GameEngine':['objects/Temple','objects/Fanatic','objects/Holy']
+           'GeomEngine':['objects/Temple','Constants'],
+
+           'GameEngine':['GeomEngine','objects/Fanatic','objects/Holy']
         }
     });
 
