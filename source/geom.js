@@ -23,20 +23,62 @@ function initialize(){
     var graphics = new PIXI.Graphics();
 
 
-    stage.addChild(graphics);
+//    stage.addChild(graphics);
+
+    function getRectTexture(){
+        graphics.clear();
+
+        graphics.beginFill(0xFF0000,1);
+//        graphics.drawRect(200 + 50*Math.sin(count),200 + 50*Math.cos(count),200 + 50*Math.sin(count),200 + 50*Math.cos(count));
+        graphics.drawRect(200,200,200,200);
+        graphics.endFill();
+        graphics.beginFill(0x00FF00,1);
+        //triangle
+        graphics.drawPolygon([
+                300,300,
+                500,300,
+                400,500,
+                300,300
+        ]);
+        graphics.endFill();
+        return graphics.generateTexture();
+    }
+
+    var rectTexture = getRectTexture();
+
+    var rectSprite = new PIXI.Sprite(rectTexture);
+    rectSprite.anchor.x = 0.5;
+    rectSprite.anchor.y = 0.5;
+
+    rectSprite.position.x = 200;
+    rectSprite.position.y = 200;
+
+    stage.addChild(rectSprite);
+
 
     function animate() {
 
         requestAnimationFrame( animate );
         count += 0.05;
+
+        rectSprite.rotation+=0.03;
+//        rectSprite.anchor.x = 200;
+
+
+//        tilingSprite.tileScale.x = 2 + Math.sin(count);
+//        tilingSprite.tileScale.y = 2 + Math.cos(count);
+
+//        tilingSprite.tilePosition.x += 1;
+//        tilingSprite.tilePosition.y += 1;
+
+
+
+        renderer.render(stage);
+        return;
+
         graphics.clear();
 
-        graphics.beginFill(0xFF0000,1);
 
-        // rectangle
-        graphics.drawRect(200 + 50*Math.sin(count),200 + 50*Math.cos(count),200 + 50*Math.sin(count),200 + 50*Math.cos(count));
-
-        graphics.endFill();
 
         graphics.beginFill(0x00FF00,1);
         //triangle
