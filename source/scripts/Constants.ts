@@ -10,5 +10,9 @@ module Geom{
         public static HolyHpPerLevel = 5;
         public static HolyPixelsPerLevel = 5;
         public static HolyStartPixels = 10;
+
+		public static TempleColor = ex.Color.fromHex('#653459');
+		public static FanaticColor = ex.Color.fromHex('#ED1C24');
+		public static HolyColor = ex.Color.fromHex('#03BAB3');
     }
 }

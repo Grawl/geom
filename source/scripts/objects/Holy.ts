@@ -9,7 +9,7 @@ module Geom{
                     Constants.HolyStartPixels + (_level-1) * Constants.HolyPixelsPerLevel,
                     Constants.HolyStartPixels + (_level-1) * Constants.HolyPixelsPerLevel
             );
-            this.color = ex.Color.Azure;
+            this.color = Constants.HolyColor;
             this._health = Constants.HolyHpPerLevel * _level;
         }
 
