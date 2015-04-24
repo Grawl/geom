@@ -15,7 +15,10 @@ module.exports = function (grunt) {
 				dest: "<%=_dist_ts%>",
 				options: {
 					basePath: "<%=_src_ts%>/",
-					sourceMap: true
+					sourceMap: true,
+					module: 'amd',
+					target: 'es5',
+					declaration: true
 				}
 			}
 		},
