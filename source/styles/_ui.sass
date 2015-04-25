@@ -1,3 +1,4 @@
+$row-height: 60px
 .ui
 	position: absolute
 	z-index: 1
@@ -14,12 +15,13 @@
 		bottom: 0
 		left: 0
 		width: 100%
-		$height: 60px
+		$height: $row-height
 		height: $height
 		line-height: $height
 		text-align: center
 		vertical-align: middle
-		&-item
+		background: linear-gradient(to right, hsla(0, 0%, 100%, 0), hsla(0, 0%, 100%, 0.15))
+		&-add
 			display: inline-block
 			font:
 				family: $font-sans-condenced
@@ -44,7 +46,7 @@
 			&-type
 				&_Fanatic
 					&::before
-						@extend %control-item
+						@extend %control-add
 						$size: 1em
 						border: solid transparent
 						border-width: 0 ($size * 0.618) $size
@@ -52,28 +54,69 @@
 						margin-right: 0.25em
 				&_Temple
 					&::before
-						@extend %control-item
+						@extend %control-add
 						$size: 1em
 						width: $size
 						height: $size
 						background-color: hsl(314, 32%, 30%)
 				&_Holy
 					&::before
-						@extend %control-item
+						@extend %control-add
 						$size: 1em
 						width: $size
 						height: $size
 						border-radius: $size
 						background-color: hsl(177, 96%, 37%)
+		&-speed
+			&-slower
+				@extend %control-speed
+				left: 0
+				&::before
+					content: '◀︎'
+			&-faster
+				@extend %control-speed
+				right: 0
+				&::before
+					content: '▶︎'
 	&-container
 		position: absolute
 		top: 0
 		left: 0
 		width: 100%
 		height: 100%
-%control-item
+%control-add
 	content: ''
 	display: inline-block
 	position: relative
 	top: 0.1em
 	margin-right: 0.5em
+%control-speed
+	position: absolute
+	bottom: 0
+	$offset-vertical: 0.7em
+	margin: $offset-vertical 0.75em
+	padding: 0
+	color: transparent
+	width: 10em
+	height: 80%
+	border: 0
+	$color: hsl(0, 0%, 10%)
+	background: $color
+	border-radius: 3px
+	box-shadow: 0 3px 0 lighten($color, 10%)
+	vertical-align: middle
+	&::before
+		display: block
+		position: absolute
+		top: 0
+		left: 0
+		width: 100%
+		height: 100%
+		line-height: 2.2em
+		text-align: center
+		vertical-align: middle
+		color: hsla(0, 0%, 100%, 0.9)
+		font:
+			size: 2em
+	&:active
+		margin-bottom: $offset-vertical - 0.2

@@ -12,18 +12,25 @@ html
 					p Вера: #[span#faithLevel 0]
 					p Враги повсюду
 			.ui.ui-control
-				-var _class_control_item='ui-control-item'
+				-var _class_control_add='ui-control-add'
 				each key, value in {Fanatic: 'Фанатик', Temple: 'Храм', Holy: 'Святой'}
 					-var _class=[]
-					-_class.push(_class_control_item)
-					-_class.push(_class_control_item+'-type_'+value)
+					-_class.push(_class_control_add)
+					-_class.push(_class_control_add+'-type_'+value)
 					button(
 					type="button"
 					onclick="Geom.gameEngine.run('create#{value}')"
 					class=_class
 					)
 						=key
-						span(id='#{value}Level').ui-control-item-level
+						span(id='#{value}Level' class=_class_control_add+'-level')
 							sup 0
+				-var _class_control_speed='ui-control-speed'
+				each key, value in {slower: '← Медленнее', faster: 'Быстрее →'}
+					button(
+					type="button"
+					class=_class_control_speed+'-'+value
+					onclick="Geom.gameEngine.run('rotate_#{value}')"
+					)=key
 		script(src='vendor/require.js')
 		script(type='text/javascript', src='scripts/geom.js')
