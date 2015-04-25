@@ -9,7 +9,7 @@ module Geom{
 
         constructor(){
             this._engine = new GeomEngine(800, 600);
-			this._engine.backgroundColor = ex.Color.fromHex('#000000');
+			this._engine.backgroundColor = ex.Color.fromHex('#0F0F0F');
         }
 
         public initialize(){
