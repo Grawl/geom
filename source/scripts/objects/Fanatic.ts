@@ -9,10 +9,12 @@ module Geom{
         _cooldown:number;
 
         constructor(private _level:number, startX:number, startY:number){
-            super(startX, startY, Constants.FanaticStartPixels - 1.5 * _level, Constants.FanaticStartPixels - 1.5*_level);
-            this.color = Constants.FanaticColor;
+            super(startX, startY, Constants.FanaticStartPixels - 1.5 * _level, Constants.FanaticStartPixels - 1.5*_level, Constants.FanaticColor);
             this._health = 1;
-            this.setRandomRotation();
+//            this.addDrawing('triangle',this.getTriangle());
+
+//            this.setDrawing('triangle');
+//            this.setRandomRotation();
 
             this.collisionType = ex.CollisionType.Passive;
 
@@ -26,6 +28,22 @@ module Geom{
         private resetCooldown(){
             this._cooldown = Constants.FanaticStartShootCooldownInFPS -
                 Constants.FanaticShootCooldownReductionPerLevelInFPS * this._level;
+        }
+
+        private getTriangle(){
+            var triangle = new ex.Polygon([
+                new ex.Point(this.x, this.y),
+                new ex.Point(this.x + Constants.FanaticStartPixels - 1.5*this._level, this.y),
+                new ex.Point(this.x + (Constants.FanaticStartPixels - 1.5*this._level)/2, this.y - (Constants.FanaticStartPixels - 1.5*this._level)/2
+//                ,new ex.Point(this.x, this.y))
+                )
+            ]);
+
+            triangle.lineColor = Constants.FanaticColor;
+            triangle.lineWidth = 5;
+            triangle.fillColor = Constants.FanaticColor;
+            triangle.filled = true;
+            return triangle;
         }
 
         public draw(ctx: CanvasRenderingContext2D, delta: number){
