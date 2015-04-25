@@ -93,6 +93,18 @@ module.exports = function (grunt) {
 				}
 			}
 		},
+		newer: {
+			options: {
+				override: function (detail, include) {
+					if (detail.task === 'jade' || 'sass') {
+						return include(true);
+					}
+					else {
+						return include(false);
+					}
+				}
+			}
+		},
 		watch: {
 			typescript: {
 				files: "<%= _src_ts_files %>",
