@@ -2,8 +2,8 @@
 /// <reference path="BaseObject.ts"/>
 
 module Geom{
-    export class FanaticShoot extends Geom.BaseObject{
-
+    export class FanaticShoot extends ex.Actor{
+        private _health;
         constructor(startX:number, startY:number, side:ex.Side){
             super(startX, startY, 5, 5, ex.Color.fromHex('#FFFFFF'));
             this._health = 1;

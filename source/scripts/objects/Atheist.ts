@@ -2,9 +2,9 @@
 /// <reference path="BaseObject.ts"/>
 
 module Geom{
-    export class Atheist extends Geom.BaseObject{
+    export class Atheist extends ex.Actor{
         private _lifeMilliseconds=0;
-
+        private _health;
         constructor(canvasWidth, canvasHeight){
             super(Math.random() * canvasWidth,
                     Math.random() * canvasHeight,
@@ -51,10 +51,9 @@ module Geom{
             {
                 this.kill();
             }
-            else if (this._lifeMilliseconds > 1000)
+            else
                 {
-                    this.setRandomRotation();
-                    this._lifeMilliseconds-=1000;
+                    this.rotation+=0.3;
                 }
 
 

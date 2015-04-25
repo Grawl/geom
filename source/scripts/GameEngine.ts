@@ -45,6 +45,14 @@ module Geom{
                        }
 
                        this._engine.resetFaith();
+                       break;
+
+                   case ex.InputKey.Left:
+                       this._engine.slower();
+                       break;
+                   case ex.InputKey.Right:
+                       this._engine.faster();
+                       break;
                }
             });
         }

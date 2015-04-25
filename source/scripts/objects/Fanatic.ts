@@ -48,6 +48,9 @@ module Geom{
 
         public draw(ctx: CanvasRenderingContext2D, delta: number){
             ctx.fillStyle = this.color.toString();
+            this._secondPoint = new ex.Point(this.x + Constants.FanaticStartPixels - 1.5*this._level, this.y);
+            this._thirdPoint = new ex.Point(this.x + (Constants.FanaticStartPixels - 1.5*this._level)/2, this.y - (Constants.FanaticStartPixels - 1.5*this._level)/2);
+
             ctx.beginPath();
 
             ctx.moveTo(this.x, this.y);
@@ -61,6 +64,7 @@ module Geom{
         public update(engine: GeomEngine, delta: number){
             // Проверяем, есть ли у нас свободные углы и стреляем одним из них
 
+            super.update(engine, delta);
             // Сначала стреляем всеми свободными
             if (this._cooldown>0)
             {

@@ -39,6 +39,7 @@ module Geom{
                 engine.faith+=2*this._level;
                 this.resetCooldown();
             }
+            super.update(engine, delta);
         }
     }
 }

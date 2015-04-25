@@ -10,6 +10,9 @@ module Geom {
         private _atheistCooldown:number = 0;
 
         private _startPoint=null;
+        public angle = 0;
+        public angleSpeed = 0.1;
+        public speed = 30;
 
         constructor(width, height) {
             super(width, height);
@@ -27,7 +30,13 @@ module Geom {
                 }
 
                 this._atheistCooldown--;
-            })
+                this.angle+=this.angleSpeed;
+
+                if (this.angle > 3.15)
+                {
+                    this.angle=0;
+                }
+            });
 
             this.on('createTemple', e => this.createTemple());
             this.on('createFanatic', e => this.createFanatic());
@@ -57,6 +66,27 @@ module Geom {
             }
         }
 
+        public slower(){
+            this.angleSpeed -= 0.3;
+
+            if (this.speed > 10)
+            {
+                this.speed -= 10;
+            }
+
+            console.log(this.angleSpeed);
+            console.log(this.speed);
+        }
+        public faster(){
+            this.angleSpeed += 0.3;
+
+            if (this.speed < 100)
+            {
+                this.speed += 10;
+            }
+            console.log(this.angleSpeed);
+            console.log(this.speed);
+        }
 
         private getNextStartPoint(){
             if (!this._startPoint)
@@ -152,6 +182,18 @@ module Geom {
             //Округление вниз
             return Math.floor(_.sum(_.filter(this.rootScene.children, ch => ch instanceof Temple),
                 t => t._level * 0.5) - _.filter(this.rootScene.children, ch => ch instanceof Holy));
+        }
+
+        public getCenterPoint(){
+            var children = _.filter(this.rootScene.children, c=>
+            c instanceof Temple || c instanceof Fanatic || c instanceof Holy);
+
+            var minX = _.min(children, c => c.x).x;
+            var minY = _.min(children, c => c.y).y;
+            var maxX = _.max(children, c => c.x).x;
+            var maxY = _.max(children, c => c.y).y;
+
+            return new ex.Point((minX + maxX)/2, (minY + maxY)/ 2);
         }
     }
 }
