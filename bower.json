@@ -5,7 +5,6 @@
   "dependencies": {
     "requirejs": "~2.1.11",
     "excalibur": "~0.2.2",
-    "reset-css": "~2.0.20110126",
     "lodash": "~3.7.0"
   }
 }
