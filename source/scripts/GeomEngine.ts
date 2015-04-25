@@ -70,7 +70,7 @@ module Geom{
                 return 3 - _.filter(this.rootScene.children, ch => ch instanceof Fanatic).length;
             }
             return _.sum(_.filter(this.rootScene.children, ch => ch instanceof Temple),
-                t => t._level * 3) - _.filter(this.rootScene.children, ch => ch instanceof Fanatic);
+                t => t._level * 3) - _.filter(this.rootScene.children, ch => ch instanceof Fanatic).length;
         }
 
         public getHolyLimit(){
