@@ -30,16 +30,17 @@ module Geom{
         public static TempleCooldown = 120;
         public static HolyCooldown = 180;
 
-        public static MaxAtheistSpeed = 100;
+        public static MaxAtheistSpeed = 300;
 
         public static MaxAtheistSize = 50;
 
         public static AtheistBaseCooldown = 300;
 
-        public static TempleWeight = 10;
+        public static TempleWeight = 50;
         public static FanaticWeight = 10;
-        public static HolyWeight = 10;
+        public static HolyWeight = 100;
 
+        public static FanaticShootSpeed = 300;
     }
 
 

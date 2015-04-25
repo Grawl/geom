@@ -10,13 +10,13 @@ module Geom{
 
             switch(side){
                 case ex.Side.Left:
-                    this.dx = -10;
+                    this.dx = -Constants.FanaticShootSpeed;
                     break;
                 case ex.Side.Right:
-                    this.dx = 10;
+                    this.dx = Constants.FanaticShootSpeed;
                     break;
                 case ex.Side.Top:
-                    this.dy = -10;
+                    this.dy = -Constants.FanaticShootSpeed;
                     break;
             }
 

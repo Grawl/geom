@@ -17,7 +17,7 @@ html
 					-_class.push(_class_control_item+'-type_'+value)
 					button(
 					type="button"
-					id='create#{value}()'
+					onclick="Geom.gameEngine.run('create#{value}')"
 					class=_class
 					)
 						=key
