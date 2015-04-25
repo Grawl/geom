@@ -4,12 +4,7 @@
   "repository": "http://github.com/grawl/geom",
   "dependencies": {
     "requirejs": "~2.1.11",
-    "excalibur": "#master",
+    "excalibur": "~0.2.2",
     "lodash": "~3.7.0"
-  },
-    "overrides":{
-        "excalibur":{
-            "main":"dist/excalibur-0.3.0.js"
-        }
-    }
+  }
 }

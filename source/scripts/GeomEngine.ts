@@ -8,7 +8,7 @@ module Geom {
         public fanaticLevel = 1;
         public holyLevel = 1;
         private _atheistCooldown:number = 0;
-        private _holyGroup:ex.Group=null;
+
         private _startPoint=null;
 
         constructor(width, height) {
@@ -102,11 +102,6 @@ module Geom {
         createTemple() {
             this.getNextStartPoint();
             if (this.faith >= Constants.TempleFaithCost) {
-                if (!this._holyGroup)
-                {
-
-                }
-
                 this.addChild(new Temple(this.templeLevel, this._startPoint.x, this._startPoint.y));
                 this.faith -= Constants.TempleFaithCost;
                 this.changeAtheistCooldown(HolyObjects.Temple);
@@ -157,17 +152,6 @@ module Geom {
             //Округление вниз
             return Math.floor(_.sum(_.filter(this.rootScene.children, ch => ch instanceof Temple),
                 t => t._level * 0.5) - _.filter(this.rootScene.children, ch => ch instanceof Holy));
-        }
-
-        public getCenterPoint(){
-            var children = _.filter(this.rootScene.children, c => c instanceof Temple || c instanceof Fanatic || c instanceof Holy);
-
-            var minX = _.min(children, c => c.x);
-            var minY = _.min(children, c => c.y);
-            var maxX = _.max(children, c => c.x);
-            var maxY = _.max(children, c => c.y);
-
-            return new ex.Point((minX + maxX)/2,(minY+maxY)/2);
         }
     }
 }
