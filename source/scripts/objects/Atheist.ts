@@ -48,6 +48,7 @@ module Geom{
             {
                 this.die();
             }
+            super.update(engine, delta);
         }
     }
 }

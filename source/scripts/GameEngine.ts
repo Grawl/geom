@@ -56,7 +56,7 @@ module Geom{
         }
 
         private initializeBuildingEvents(){
-            this._engine.on('keydown', (event:ex.KeyEvent)=>{
+            this._engine.on('keydown', (event:any)=>{
                this.getNextStartPoint();
                switch (event.key){
                    case ex.InputKey.Q:
@@ -64,6 +64,8 @@ module Geom{
                        {
                            this._engine.addChild(new Temple(this._engine.templeLevel, this._startPoint.x, this._startPoint.y));
                            this._engine.faith-=Constants.TempleFaithCost;
+                           this._engine.changeAtheistCooldown(HolyObjects.Temple);
+
                        }
                        break;
                    case ex.InputKey.W:
@@ -71,6 +73,7 @@ module Geom{
                        {
                            this._engine.addChild(new Fanatic(this._engine.fanaticLevel, this._startPoint.x, this._startPoint.y));
                            this._engine.faith-=Constants.FanaticFaithCost;
+                           this._engine.changeAtheistCooldown(HolyObjects.Fanatic);
                        }
                        break;
                    case ex.InputKey.E:
@@ -78,6 +81,7 @@ module Geom{
                        {
                            this._engine.addChild(new Holy(this._engine.holyLevel, this._startPoint.x, this._startPoint.y));
                            this._engine.faith-=Constants.HolyFaithCost;
+                           this._engine.changeAtheistCooldown(HolyObjects.Holy);
                        }
                        break;
                    case ex.InputKey.C:

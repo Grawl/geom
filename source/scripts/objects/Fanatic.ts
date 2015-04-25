@@ -80,7 +80,7 @@ module Geom{
 
         pointIsFree(x:number,y:number,scene:ex.Scene){
             for(var i=0;i<scene.children.length;i++){
-                if (scene.children[i].contains(x,y) && scene.children[i] != this)
+                if (scene.children[i].contains(x,y) && scene.children[i] !== this)
                 {
                     return false;
                 }

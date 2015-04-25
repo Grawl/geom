@@ -33,6 +33,19 @@ module Geom{
         public static MaxAtheistSpeed = 100;
 
         public static MaxAtheistSize = 50;
+
+        public static AtheistBaseCooldown = 300;
+
+        public static TempleWeight = 10;
+        public static FanaticWeight = 10;
+        public static HolyWeight = 10;
+
     }
 
+
+    export enum HolyObjects{
+        Temple = 0,
+        Fanatic = 1,
+        Holy = 2
+    }
 }
