@@ -87,10 +87,8 @@ module.exports = function (grunt) {
 		connect: {
 			build: {
 				options: {
+					livereload: true,
 					port: 9010,
-					livereload: 35729,
-					hostname: "127.0.0.1",
-					//open: "http://127.0.0.1:9010/",
 					base: "<%= _dist %>"
 				}
 			}
@@ -115,8 +113,18 @@ module.exports = function (grunt) {
 				],
 				tasks: "newer:copy"
 			},
-			options: {
-				livereload: true
+			system: {
+				files: [
+					"*.js",
+					"*.json"
+				],
+				tasks: "build"
+			},
+			livereload: {
+				options: {
+					livereload: true
+				},
+				files: "<%= _dist %>/**/*"
 			}
 		}
 	});
