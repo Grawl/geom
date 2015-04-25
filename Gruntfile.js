@@ -1,22 +1,66 @@
 module.exports = function (grunt) {
 	require("time-grunt")(grunt);
 	require("jit-grunt")(grunt, {
-		bower: 'main-bower-files'
+		bower: "main-bower-files"
 	});
 	grunt.initConfig({
 		_src: "source",
 		_dist: "build",
-		_src_ts: "<%=_src%>/scripts",
-		_src_ts_files: "<%=_src%>/scripts/**/*.ts",
-		_dist_ts: "<%=_dist%>/scripts",
+		_src_ts: "<%= _src %>/scripts",
+		_src_ts_files: "<%= _src %>/scripts/**/*.ts",
+		_src_sass: "<%= _src %>/styles",
+		_src_jade: "<%= _src %>/templates",
+		_dist_ts: "<%= _dist %>/scripts",
 		typescript: {
 			build: {
-				src: "<%=_src_ts_files%>",
-				dest: "<%=_dist_ts%>",
+				src: "<%= _src_ts_files %>",
+				dest: "<%= _dist_ts %>",
 				options: {
-					basePath: "<%=_src_ts%>/",
+					basePath: "<%= _src_ts %>/",
 					sourceMap: true
 				}
+			}
+		},
+		jade: {
+			build: {
+				options: {
+					pretty: true,
+					client: false
+				},
+				expand: true,
+				cwd: "<%= _src_jade %>",
+				dest: "<%= _dist %>/",
+				src: [
+					"*.jade",
+					"!_*.jade"
+				],
+				ext: ".html"
+			}
+		},
+		sass: {
+			build: {
+				options: {
+					sourcemap: true
+				},
+				expand: true,
+				cwd: "<%= _src_sass %>",
+				dest: "<%= _dist %>",
+				src: [
+					"*.sass",
+					"!_*.sass"
+				],
+				ext: ".css"
+			}
+		},
+		postcss: {
+			build: {
+				options: {
+					processors: [
+						require("autoprefixer-core").postcss
+					],
+					map: true
+				},
+				src: "<%= _dist %>/*.css"
 			}
 		},
 		clean: {
@@ -25,17 +69,19 @@ module.exports = function (grunt) {
 		copy: {
 			build: {
 				expand: true,
-				cwd: "<%=_src%>/",
-				dest: "<%=_dist%>/",
+				cwd: "<%= _src %>/",
+				dest: "<%= _dist %>/",
 				src: [
 					"**/*",
-					"!scripts"
+					"!scripts/**/*",
+					"!styles/**/*",
+					"!templates/**/*"
 				]
 			}
 		},
 		bower: {
 			build: {
-				dest: "<%=_dist%>/vendor"
+				dest: "<%= _dist %>/vendor"
 			}
 		},
 		connect: {
@@ -45,24 +91,27 @@ module.exports = function (grunt) {
 					livereload: 35729,
 					hostname: "127.0.0.1",
 					//open: "http://127.0.0.1:9010/",
-					base: "<%=_dist%>",
-					//middleware: function(connect) {
-					//	return [
-					//		connect().use('/bower_components', connect.static('./bower_components'))
-					//	];
-					//}
+					base: "<%= _dist %>"
 				}
 			}
 		},
 		watch: {
 			typescript: {
-				files: "<%=_src_ts_files%>",
+				files: "<%= _src_ts_files %>",
 				tasks: "newer:typescript"
+			},
+			sass: {
+				files: "<%= _src_sass %>/*.sass",
+				tasks: "newer:sass"
+			},
+			jade: {
+				files: "<%= _src_jade %>/*.jade",
+				tasks: "newer:jade"
 			},
 			base: {
 				files: [
-					"<%=_src%>/**/*",
-					"!<%=_src%>/scripts"
+					"<%= _src %>/**/*",
+					"!<%= _src %>/{scripts,styles,templates}/**/*"
 				],
 				tasks: "newer:copy"
 			},
@@ -75,7 +124,10 @@ module.exports = function (grunt) {
 		[
 			"bower",
 			"copy",
-			"typescript"
+			"typescript",
+			"jade",
+			"sass",
+			"postcss"
 		]
 	);
 	grunt.registerTask("default", [

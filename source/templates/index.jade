@@ -1,0 +1,18 @@
+doctype html
+html
+	head(lang='ru')
+		meta(charset='UTF-8')
+		title Геом
+		link(rel='stylesheet', href='index.css')
+	body
+		.ui-container
+			.ui.ui-info
+				.ui-info-item.left Уровень #[span#level 0]
+				.ui-info-item.right Вера: #[span#faith 0]
+			.ui.ui-control
+				each type in ['Fanatic', 'Temple', 'Holy']
+					button(type="button" id='create#{type}()').ui-control-item
+						=type
+						span(id='#{type}Level'): sup 0
+		script(src='vendor/require.js')
+		script(type='text/javascript', src='scripts/geom.js')
