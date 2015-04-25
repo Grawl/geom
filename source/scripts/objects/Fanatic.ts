@@ -46,7 +46,7 @@ module Geom{
                 return;
             }
 
-            engine.faith+=0.3 *this._level;
+            engine.faith = parseFloat( (engine.faith + (0.3 *this._level)).toFixed(1));
 
             this.resetCooldown();
             if (!engine.hasTemple())
