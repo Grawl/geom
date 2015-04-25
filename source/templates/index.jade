@@ -8,7 +8,9 @@ html
 		.ui-container
 			.ui.ui-info
 				.ui-info-item.left Уровень #[span#level 0]
-				.ui-info-item.right Вера: #[span#faithLevel 0]
+				.ui-info-item.right
+					p Вера: #[span#faithLevel 0]
+					p Враги повсюду
 			.ui.ui-control
 				-var _class_control_item='ui-control-item'
 				each key, value in {Fanatic: 'Фанатик', Temple: 'Храм', Holy: 'Святой'}
