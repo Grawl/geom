@@ -56,7 +56,7 @@ module Geom{
         }
 
         private initializeBuildingEvents(){
-            this._engine.on('keydown', (event:any)=>{
+            this._engine.on('keydown', (event:ex.KeyEvent)=>{
                this.getNextStartPoint();
                switch (event.key){
                    case ex.InputKey.Q:

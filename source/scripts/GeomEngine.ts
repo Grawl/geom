@@ -12,7 +12,12 @@ module Geom{
             super(width,height);
 
             this.resetFaith();
+
+            this.on('update', (e:ex.GameEvent)=>{
+                document.getElementById("faithLabel").textContent=this.faith.toString();
+            });
         }
+
 
         public resetFaith(){
             this.faith = Constants.StartFaith;
