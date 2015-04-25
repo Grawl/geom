@@ -14,7 +14,7 @@ module Geom{
             this.resetFaith();
 
             this.on('update', (e:ex.GameEvent)=>{
-                document.getElementById("faithLabel").textContent=this.faith.toString();
+                document.getElementById("faithLevel").textContent=this.faith.toString();
             });
         }
 
