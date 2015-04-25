@@ -30,21 +30,21 @@ module Geom{
                 Constants.FanaticShootCooldownReductionPerLevelInFPS * this._level;
         }
 
-//        private getTriangle(){
-//            var triangle = new ex.Polygon([
-//                new ex.Point(this.x, this.y),
-//                new ex.Point(this.x + Constants.FanaticStartPixels - 1.5*this._level, this.y),
-//                new ex.Point(this.x + (Constants.FanaticStartPixels - 1.5*this._level)/2, this.y - (Constants.FanaticStartPixels - 1.5*this._level)/2
-////                ,new ex.Point(this.x, this.y))
-//                )
-//            ]);
-//
-//            triangle.lineColor = Constants.FanaticColor;
-//            triangle.lineWidth = 5;
-//            triangle.fillColor = Constants.FanaticColor;
-//            triangle.filled = true;
-//            return triangle;
-//        }
+        private getTriangle(){
+            var triangle = new ex.Polygon([
+                new ex.Point(this.x, this.y),
+                new ex.Point(this.x + Constants.FanaticStartPixels - 1.5*this._level, this.y),
+                new ex.Point(this.x + (Constants.FanaticStartPixels - 1.5*this._level)/2, this.y - (Constants.FanaticStartPixels - 1.5*this._level)/2
+//                ,new ex.Point(this.x, this.y))
+                )
+            ]);
+
+            triangle.lineColor = Constants.FanaticColor;
+            triangle.lineWidth = 5;
+            triangle.fillColor = Constants.FanaticColor;
+            triangle.filled = true;
+            return triangle;
+        }
 
         public draw(ctx: CanvasRenderingContext2D, delta: number){
             ctx.fillStyle = this.color.toString();
