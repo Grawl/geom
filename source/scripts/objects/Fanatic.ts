@@ -12,6 +12,8 @@ module Geom{
             super(startX, startY, Constants.FanaticStartPixels - 1.5 * _level, Constants.FanaticStartPixels - 1.5*_level);
             this.color = Constants.FanaticColor;
             this._health = 1;
+            this.setRandomRotation();
+
             this.collisionType = ex.CollisionType.Passive;
 
             this._secondPoint = new ex.Point(this.x + Constants.FanaticStartPixels - 1.5*this._level, this.y);

@@ -82,8 +82,8 @@ module Geom {
             var index = Math.floor(Math.random() * children.length);
             var figure = children[index];
 
-            var signX = Math.random() * 10 % 2;
-            var signY = Math.random() * 10 % 2;
+            var signX = Math.floor(Math.random() * 17) % 2;
+            var signY = Math.floor(Math.random() * 23) % 2;
 
             var x = signX?figure.x + Math.random()*figure.getWidth(): figure.x - Math.random()*figure.getWidth();
             var y = signY?figure.y + Math.random()*figure.getHeight(): figure.y - Math.random()*figure.getHeight();

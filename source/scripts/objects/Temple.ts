@@ -15,6 +15,7 @@ module Geom{
            this._health = _level * Constants.TempleHpPerLevel;
 
            this.resetCooldown();
+           this.setRandomRotation();
            this.addCollisionGroup('godObjects');
        }
 

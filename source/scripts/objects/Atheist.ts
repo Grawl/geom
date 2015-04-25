@@ -3,28 +3,28 @@
 
 module Geom{
     export class Atheist extends Geom.BaseObject{
+        private _lifeMilliseconds=0;
 
         constructor(canvasWidth, canvasHeight){
-            var startX = Math.random() * canvasWidth;
-            var startY = Math.random() * canvasHeight;
+            super(Math.random() * canvasWidth,
+                    Math.random() * canvasHeight,
+                    Math.random() * Constants.MaxAtheistSize,
+                    Math.random() * Constants.MaxAtheistSize,
+                Constants.AtheistColor
+            );
 
-            var signXSpeed = Math.random() * 10 % 2;
-            var signYSpeed = Math.random() * 10 % 2;
+
+            var signXSpeed = Math.round((Math.random() * 10 / Math.random() * 15 ))%3;
+            var signYSpeed = Math.round((Math.random() * 10 / Math.random() * 15 ))%4;
+            console.log(signXSpeed, signYSpeed);
 
             var xSpeed = Math.random() * Constants.MaxAtheistSpeed ;
             var ySpeed = Math.random() * Constants.MaxAtheistSpeed;
 
-            var width = Math.random() * Constants.MaxAtheistSize;
-            var height = Math.random() * Constants.MaxAtheistSize;
-
-            super(startX, startY, width, height, Constants.AtheistColor);
-
             this.collisionType = ex.CollisionType.Active;
 
-            this.dx =signXSpeed ? xSpeed : -xSpeed;
-            this.dy =signYSpeed ? ySpeed : -ySpeed;
-
-
+            this.dx =signXSpeed %2 ? xSpeed : -xSpeed;
+            this.dy =signYSpeed%2 ? ySpeed : -ySpeed;
 
             this._health = 1;
 
@@ -42,14 +42,22 @@ module Geom{
         }
 
         public update(engine:GeomEngine, delta:number){
+           this._lifeMilliseconds+=delta;
             if (this.getBottom()<=0 ||
                 this.getRight()<=0 ||
                 this.getLeft() >= engine.getWidth()||
                 this.getTop() >= engine.getHeight()
                 )
             {
-                this.die();
+                this.kill();
             }
+            else if (this._lifeMilliseconds > 1000)
+                {
+                    this.setRandomRotation();
+                    this._lifeMilliseconds-=1000;
+                }
+
+
             super.update(engine, delta);
         }
     }
