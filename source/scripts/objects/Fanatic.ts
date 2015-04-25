@@ -12,11 +12,13 @@ module Geom{
             super(startX, startY, Constants.FanaticStartPixels - 1.5 * _level, Constants.FanaticStartPixels - 1.5*_level);
             this.color = Constants.FanaticColor;
             this._health = 1;
+            this.collisionType = ex.CollisionType.Passive;
 
             this._secondPoint = new ex.Point(this.x + Constants.FanaticStartPixels - 1.5*this._level, this.y);
             this._thirdPoint = new ex.Point(this.x + (Constants.FanaticStartPixels - 1.5*this._level)/2, this.y - (Constants.FanaticStartPixels - 1.5*this._level)/2);
 
             this.resetCooldown();
+            this.addCollisionGroup('godObjects');
         }
 
         private resetCooldown(){

@@ -18,6 +18,10 @@ module Geom{
             });
         }
 
+//        update(delta:number){
+//            super.update(delta);
+//            document.getElementById("faithLabel").textContent=this.faith.toString();
+//        }
 
         public resetFaith(){
             this.faith = Constants.StartFaith;

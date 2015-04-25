@@ -19,6 +19,20 @@ module Geom{
                     this.dy = -10;
                     break;
             }
+
+            this.addCollisionGroup('godObjects');
+        }
+
+        public update(engine:GeomEngine, delta:number){
+            if (this.getBottom()<=0 ||
+                this.getRight()<=0 ||
+                this.getLeft() >= engine.getWidth()||
+                this.getTop() >= engine.getHeight()
+                )
+            {
+                this.die();
+            }
+            super.update(engine, delta);
         }
     }
 }
