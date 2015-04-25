@@ -112,7 +112,10 @@ module.exports = function (grunt) {
 			},
 			sass: {
 				files: "<%= _src_sass %>/*.sass",
-				tasks: "newer:sass"
+				tasks: [
+					"newer:sass",
+					"postcss"
+				]
 			},
 			jade: {
 				files: "<%= _src_jade %>/*.jade",
