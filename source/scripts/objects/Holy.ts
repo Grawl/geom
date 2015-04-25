@@ -11,8 +11,10 @@ module Geom{
                     Constants.HolyStartPixels + (_level-1) * Constants.HolyPixelsPerLevel
             );
             this.color = Constants.HolyColor;
+            this.collisionType = ex.CollisionType.Passive;
             this._health = Constants.HolyHpPerLevel * _level;
             this.resetCooldown();
+            this.addCollisionGroup('godObjects');
         }
 
         public draw(ctx: CanvasRenderingContext2D, delta: number){

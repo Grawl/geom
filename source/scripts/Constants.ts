@@ -19,6 +19,8 @@ module Geom{
 		public static FanaticColor = ex.Color.fromHex('#ED1C24');
 		public static HolyColor = ex.Color.fromHex('#03BAB3');
 
+		public static AtheistColor = ex.Color.fromHex('#FF00FF');
+
         public static TempleFaithCost = 30;
         public static FanaticFaithCost = 15;
         public static HolyFaithCost = 60;
@@ -27,6 +29,24 @@ module Geom{
 
         public static TempleCooldown = 120;
         public static HolyCooldown = 180;
+
+        public static MaxAtheistSpeed = 300;
+
+        public static MaxAtheistSize = 50;
+
+        public static AtheistBaseCooldown = 300;
+
+        public static TempleWeight = 50;
+        public static FanaticWeight = 10;
+        public static HolyWeight = 100;
+
+        public static FanaticShootSpeed = 300;
     }
 
+
+    export enum HolyObjects{
+        Temple = 0,
+        Fanatic = 1,
+        Holy = 2
+    }
 }

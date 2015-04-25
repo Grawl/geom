@@ -10,15 +10,29 @@ module Geom{
 
             switch(side){
                 case ex.Side.Left:
-                    this.dx = -10;
+                    this.dx = -Constants.FanaticShootSpeed;
                     break;
                 case ex.Side.Right:
-                    this.dx = 10;
+                    this.dx = Constants.FanaticShootSpeed;
                     break;
                 case ex.Side.Top:
-                    this.dy = -10;
+                    this.dy = -Constants.FanaticShootSpeed;
                     break;
             }
+
+            this.addCollisionGroup('godObjects');
+        }
+
+        public update(engine:GeomEngine, delta:number){
+            if (this.getBottom()<=0 ||
+                this.getRight()<=0 ||
+                this.getLeft() >= engine.getWidth()||
+                this.getTop() >= engine.getHeight()
+                )
+            {
+                this.die();
+            }
+            super.update(engine, delta);
         }
     }
 }

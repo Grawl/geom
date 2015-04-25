@@ -11,9 +11,11 @@ module Geom{
                   (_level - 1)*Constants.TemplePixelsPerLevel+ Constants.TempleStartPixels);
 		   this.color = Constants.TempleColor;
 
+           this.collisionType = ex.CollisionType.Passive;
            this._health = _level * Constants.TempleHpPerLevel;
 
            this.resetCooldown();
+           this.addCollisionGroup('godObjects');
        }
 
        resetCooldown(){

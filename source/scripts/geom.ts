@@ -9,15 +9,18 @@ module Geom {
             vendor:'../vendor'
         },
         shim:{
-           'objects/BaseObject':['vendor/excalibur-0.2.2','vendor/lodash'],
            'Constants':['vendor/excalibur-0.2.2'],
-           'objects/Temple':['objects/BaseObject','Constants'],
-           'objects/FanaticShoot':['objects/BaseObject','Constants'],
-           'objects/Fanatic':['objects/FanaticShoot'],
-           'objects/Holy':['objects/BaseObject','Constants'],
-           'GeomEngine':['objects/Temple','Constants'],
+           'objects/BaseObject':['vendor/lodash', 'Constants'],
+           'objects/Temple':['objects/BaseObject'],
 
-           'GameEngine':['GeomEngine','objects/Fanatic','objects/Holy']
+           'objects/FanaticShoot':['objects/BaseObject'],
+           'objects/Fanatic':['objects/FanaticShoot'],
+
+           'objects/Holy':['objects/BaseObject'],
+           'objects/Atheist':['objects/BaseObject'],
+
+           'GeomEngine':['objects/Temple'],
+           'GameEngine':['GeomEngine','objects/Fanatic','objects/Holy', 'objects/Atheist']
         }
     });
 
