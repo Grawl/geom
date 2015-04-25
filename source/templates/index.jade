@@ -10,9 +10,18 @@ html
 				.ui-info-item.left Уровень #[span#level 0]
 				.ui-info-item.right Вера: #[span#faithLevel 0]
 			.ui.ui-control
-				each type in ['Fanatic', 'Temple', 'Holy']
-					button(type="button" id='create#{type}()').ui-control-item
-						=type
-						span(id='#{type}Level'): sup 0
+				-var _class_control_item='ui-control-item'
+				each key, value in {Fanatic: 'Фанатик', Temple: 'Храм', Holy: 'Святой'}
+					-var _class=[]
+					-_class.push(_class_control_item)
+					-_class.push(_class_control_item+'-type_'+value)
+					button(
+					type="button"
+					id='create#{value}()'
+					class=_class
+					)
+						=key
+						span(id='#{value}Level').ui-control-item-level
+							sup 0
 		script(src='vendor/require.js')
 		script(type='text/javascript', src='scripts/geom.js')
