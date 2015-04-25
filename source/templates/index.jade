@@ -4,6 +4,8 @@ html
 		meta(charset='UTF-8')
 		title Геом
 		link(rel='stylesheet', href='index.css')
+		script(src='vendor/require.js')
+		script(type='text/javascript', src='scripts/geom.js')
 	body
 		.ui-container
 			.ui.ui-info
@@ -23,14 +25,16 @@ html
 					class=_class
 					)
 						=key
-						span(id='#{value}Level' class=_class_control_add+'-level')
-							sup 0
+						span(class=_class_control_add + '-level')
+							sup(id='#{value}Level') 0
+					script.
+						setTimeout(function(){
+							document.getElementById('#{value}Level').innerHTML = Geom.Constants.#{value}FaithCost;
+						}, 2000);
 				-var _class_control_speed='ui-control-speed'
 				each key, value in {slower: '← Медленнее', faster: 'Быстрее →'}
 					button(
 					type="button"
-					class=_class_control_speed+'-'+value
+					class=_class_control_speed + '-' + value
 					onclick="Geom.gameEngine.run('#{value}')"
 					)=key
-		script(src='vendor/require.js')
-		script(type='text/javascript', src='scripts/geom.js')
