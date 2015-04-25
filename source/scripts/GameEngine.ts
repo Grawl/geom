@@ -27,17 +27,17 @@ module Geom{
         private initializeBuildingEvents(){
             this._engine.on('keydown', (event:any)=>{
                switch (event.key){
-                   case ex.InputKey.Q:
+                   case ex.Input.Keys.Q:
                        this._engine.createFanatic();
                        break;
-                   case ex.InputKey.W:
+                   case ex.Input.Keys.W:
                        this._engine.createTemple();
                        break;
-                   case ex.InputKey.E:
+                   case ex.Input.Keys.E:
                        this._engine.createHoly();
 
                        break;
-                   case ex.InputKey.C:
+                   case ex.Input.Keys.C:
                        var scene = this._engine.rootScene;
 
                        for(var i=0;i<scene.children.length;i++){

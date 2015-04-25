@@ -9,7 +9,7 @@ module Geom {
             vendor:'../vendor'
         },
         shim:{
-           'Constants':['vendor/excalibur-0.2.2'],
+           'Constants':['vendor/excalibur-0.3.0'],
            'objects/BaseObject':['vendor/lodash', 'Constants'],
            'objects/Temple':['objects/BaseObject'],
 
