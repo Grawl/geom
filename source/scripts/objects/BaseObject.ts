@@ -14,7 +14,8 @@ module Geom{
 
             if (radius)
             {
-                if (Math.abs(radius - engine.getWidth()) < 30 || Math.abs(radius - engine.getHeight()) < 30)
+                if (Math.abs(radius - engine.getWidth()) < 100 || Math.abs(radius - engine.getHeight()) < 50
+					|| radius >=engine.getWidth() || radius>=engine.getHeight())
                 {
                     radius *= 0.5;
                 }

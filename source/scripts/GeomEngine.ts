@@ -56,14 +56,46 @@ module Geom {
             this.setText("add-Temple-current_level", this.templeLevel);
             this.setText("add-Holy-current_level", this.holyLevel);
 
-            this.setText("add-FanaticCost", this.fanaticLevel * Constants.FanaticFaithCost);
-            this.setText("add-TempleCost", this.templeLevel * Constants.TempleFaithCost);
-            this.setText("add-HolyCost", this.holyLevel * Constants.HolyFaithCost);
+            this.setText("add-FanaticCost", this.getFanaticFaithCost());
+            this.setText("add-TempleCost", this.getTempleFaithCost());
+            this.setText("add-HolyCost", this.getHolyFaithCost());
 
             this.setText("level", this.gameLevel);
 
             // update canvas class в зависимости от уровня игры
             document.getElementById("game").className = "level-"+this.gameLevel;
+
+			var info = document.getElementById("info");
+			while (info.firstChild) {
+				info.removeChild(info.firstChild);
+			}
+			var length;
+			// Инфа о левелах и количествах объектов.
+			for(var i=1;i<=this.fanaticLevel;i++){
+				length =
+					_.filter(this.rootScene.children, ch => ch instanceof Fanatic && ch._level == i).length;
+				if (length)
+				{
+					info.innerHTML+='<p>'+'Фанатики '+i+' уровня: '+ length+ '</p>';
+				}
+			}
+			for(var i=1;i<=this.templeLevel;i++){
+				length = _.filter(this.rootScene.children, ch => ch instanceof Temple && ch._level == i).length;
+
+				if (length)
+				{
+					info.innerHTML+='<p>'+'Храмы '+i+' уровня: '+length+ '</p>';
+				}
+			}
+			for(var i=1;i<=this.holyLevel;i++){
+				length = _.filter(this.rootScene.children, ch => ch instanceof Holy && ch._level == i).length;
+				if (length)
+				{
+					info.innerHTML+='<p>'+'Святые '+i+' уровня: '+length+ '</p>';
+				}
+			}
+
+
         }
 
         setText(id:string, text:any){
@@ -164,31 +196,43 @@ module Geom {
 
         createTemple() {
             this.getNextStartPoint();
-            if (this.faith >= Constants.TempleFaithCost * this.templeLevel) {
+            if (this.faith >= this.getTempleFaithCost()) {
                 this.addChild(new Temple(this.templeLevel, this._startPoint.x, this._startPoint.y));
                 this.faith -= Constants.TempleFaithCost * this.templeLevel;
                 this.changeAtheistCooldown(HolyObjects.Temple);
             }
         }
 
+		getTempleFaithCost() {
+			return Constants.TempleFaithCost + Constants.TempleFaithCostPerLevel * (this.templeLevel - 1);
+		}
+
         createFanatic() {
             this.getNextStartPoint();
-            if (this.faith >= Constants.FanaticFaithCost * this.fanaticLevel && this.getFanaticLimit() > 0) {
+            if (this.faith >= this.getFanaticFaithCost() && this.getFanaticLimit() > 0) {
                 this.addChild(new Fanatic(this.fanaticLevel, this._startPoint.x, this._startPoint.y));
                 this.faith -= Constants.FanaticFaithCost * this.fanaticLevel;
                 this.changeAtheistCooldown(HolyObjects.Fanatic);
             }
         }
 
+		getFanaticFaithCost() {
+		return Constants.FanaticFaithCost + Constants.FanaticFaithCostPerLevel * (this.fanaticLevel-1);
+	}
+
         createHoly(){
             this.getNextStartPoint();
-            if (this.faith>=Constants.HolyFaithCost*this.holyLevel && this.getHolyLimit() > 0)
+            if (this.faith>=this.getHolyFaithCost()&& this.getHolyLimit() > 0)
             {
                 this.addChild(new Holy(this.holyLevel, this._startPoint.x, this._startPoint.y));
                 this.faith-=Constants.HolyFaithCost*this.holyLevel;
                 this.changeAtheistCooldown(HolyObjects.Holy);
             }
         }
+
+		getHolyFaithCost() {
+			return Constants.HolyFaithCost + Constants.HolyFaithCostPerLevel * (this.holyLevel - 1);
+		}
 
         public resetFaith() {
             this.faith = Constants.StartFaith;
