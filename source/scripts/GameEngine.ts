@@ -8,7 +8,7 @@ module Geom{
         private _engine:GeomEngine;
 
         constructor(){
-            this._engine = new GeomEngine(800, 600);
+            this._engine = new GeomEngine(800, 600, "game");
 			this._engine.backgroundColor = ex.Color.fromHex('#0F0F0F');
         }
 
