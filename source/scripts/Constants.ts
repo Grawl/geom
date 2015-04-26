@@ -52,6 +52,8 @@ module Geom{
         public static HolyWeight = 50;
 
         public static FanaticShootSpeed = 300;
+
+		public static StartFaithGoal = 300;
     }
 
 

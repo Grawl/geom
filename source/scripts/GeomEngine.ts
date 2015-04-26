@@ -28,8 +28,14 @@ module Geom {
 				if (this.checkLoseConditions())
 				{
 				    this.stop();
+					this.showLoseLabel();
 				}
 
+				if (this.checkWinConditions())
+				{
+				    this.stop();
+					this.showWinLabel();
+				}
 
 
 
@@ -52,6 +58,14 @@ module Geom {
             this.on('createHoly', e => this.createHoly());
         }
 
+		showLoseLabel(){
+
+		}
+
+		showWinLabel(){
+
+		}
+
 		checkLoseConditions(){
 			// Если количество веры упало ниже нуля, то проигрыш
 			if (this.faith<0)
@@ -72,8 +86,13 @@ module Geom {
 				&& this.faith < this.getHolyFaithCost();
 		}
 
+		checkWinConditions(){
+			return this.gameLevel == 7;
+		}
+
         setLabelsInformation(){
             this.setText("faithLevel", this.faith.toFixed(2));
+            this.setText("faithGoal", (this.getFaithGoal() - this.faith).toFixed(2));
 
             this.setText("upgrade-FanaticCost", this.fanaticLevel * Constants.FanaticFaithUpgradeCost);
             this.setText("upgrade-TempleCost", this.templeLevel * Constants.TempleFaithUpgradeCost);
@@ -124,6 +143,18 @@ module Geom {
 
 
         }
+
+		getFaithGoal(){
+		   return Math.floor(Constants.StartFaithGoal * Math.exp(this.gameLevel - 1));
+		}
+
+		nextLevel(){
+			if (this.faith >= this.getFaithGoal())
+			{
+			    this.faith -= this.getFaithGoal();
+				this.gameLevel++;
+			}
+		}
 
         setText(id:string, text:any){
             document.getElementById(id).textContent = text;
