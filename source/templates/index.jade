@@ -15,31 +15,42 @@ html
 					p Враги повсюду
 			.ui.ui-control
 				each key, value in {Fanatic: 'Фанатик', Temple: 'Храм', Holy: 'Святой'}
-					-var _class_create=[]
-					-var _class_control_add='ui-control-add'
-					-_class_create.push(_class_control_add)
-					-_class_create.push(_class_control_add+'-type_'+value)
-					button(
-					type="button"
-					onclick="Geom.gameEngine.run('create#{value}')"
-					class=_class_create
-					)
-						=key
-						span(class=_class_control_add + '-cost')
-							sup(id='add-#{value}Cost') 0
-					-_class_upgrade="ui-control-upgrade"
-					button(
-					type="button"
-					onclick="Geom.gameEngine.run('upgrade#{value}')"
-					class=_class_upgrade
-					) A
-						span(class=_class_upgrade + '-cost')
-							sup(id='upgrade-#{value}Cost') 0
-					script.
-						setTimeout(function () {
-							document.getElementById('add-#{value}Cost').innerHTML = Geom.Constants.#{value}FaithCost;
-							document.getElementById('upgrade-#{value}Cost').innerHTML = Geom.Constants.#{value}FaithUpgradeCost;
-						}, 2000);
+					.ui-control-group
+						-var _class_create=[]
+						-var _class_control_add='ui-control-add'
+						-_class_create.push(_class_control_add)
+						-_class_create.push(_class_control_add+'-type_'+value)
+						button(
+						type="button"
+						onclick="Geom.gameEngine.run('create#{value}')"
+						class=_class_create
+						title="#{key}: Создать"
+						)
+							=key
+							span(class=_class_control_add + '-cost')
+								sup(id='add-#{value}Cost') 0
+							-_class_level=_class_control_add + '-current_level'
+							span(class=_class_level)
+								small(
+								id='add-#{value}-current_level'
+								class=_class_level + '-value'
+								) 1
+						-_class_upgrade="ui-control-upgrade"
+						button(
+						type="button"
+						onclick="Geom.gameEngine.run('upgrade#{value}')"
+						class=_class_upgrade
+						title="#{key}: Улучшить"
+						) ⏄
+							span(
+							class=_class_upgrade + '-cost'
+							id='upgrade-#{value}Cost'
+							) 0
+						script.
+							setTimeout(function () {
+								document.getElementById('add-#{value}Cost').innerHTML = Geom.Constants.#{value}FaithCost;
+								document.getElementById('upgrade-#{value}Cost').innerHTML = Geom.Constants.#{value}FaithUpgradeCost;
+							}, 2000);
 				-var _class_control_speed='ui-control-speed'
 				each key, value in {slower: '← Медленнее', faster: 'Быстрее →'}
 					button(

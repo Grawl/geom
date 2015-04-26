@@ -21,16 +21,17 @@ $row-height: 60px
 		text-align: center
 		vertical-align: middle
 		background: linear-gradient(to right, hsla(0, 0%, 100%, 0), hsla(0, 0%, 100%, 0.15))
-		&-add
+		&-group
 			display: inline-block
+			&:not(:last-of-type)
+				margin-right: 0.75em
+		&-add
 			font:
 				family: $font-sans-condenced
 				size: 20pt
 			color: white
 			border: 0
-			padding: 0.1em
-			&:not(:last-of-type)
-				margin-right: 0.75em
+			padding: 0
 			background: transparent
 			position: relative
 			cursor: pointer
@@ -43,6 +44,18 @@ $row-height: 60px
 				top: -0.5em
 				right: -0.5em
 				pointer-events: none
+			&-current_level
+				position: absolute
+				left: 0
+				width: 1em
+				@extend %Fanatic_level
+				text-align: center
+				vertical-align: middle
+				line-height: 1em
+				&-value
+					font:
+						size: 0.5em
+						family: sans-serif
 			&-type
 				&_Fanatic
 					&::before
@@ -52,6 +65,8 @@ $row-height: 60px
 						border-width: 0 ($size * 0.618) $size
 						border-bottom-color: hsl(357, 85%, 51%)
 						margin-right: 0.25em
+					%Fanatic_level
+						width: 1.3em
 				&_Temple
 					&::before
 						@extend %control-add
@@ -67,6 +82,12 @@ $row-height: 60px
 						height: $size
 						border-radius: $size
 						background-color: hsl(177, 96%, 37%)
+		&-upgrade
+			background-color: black
+			color: white
+			border: 0
+			&-cost
+				margin-left: 0.5em
 		&-speed
 			&-slower
 				@extend %control-speed
