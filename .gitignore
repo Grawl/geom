@@ -1,7 +1,0 @@
-node_modules
-bower_components
-*.log
-build
-source/scripts/*.js
-source/scripts/objects/*.js
-*.map

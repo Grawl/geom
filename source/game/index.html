@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head lang="ru">
+    <meta charset="UTF-8">
+    <title>Геом</title>
+    <link rel="stylesheet" href="index.css">
+    <script src="vendor/neume.js"></script>
+    <script src="vendor/underscore.js"></script>
+    <script src="vendor/require.js"></script>
+    <script type="text/javascript" src="scripts/geom.js"></script>
+  </head>
+  <body>
+    <div class="ui-container">
+      <div class="ui ui-info">
+        <div class="ui-info-item left">
+          <p>Уровень <span id="level">0</span></p>
+          <p id="level-up">
+            <button type="button" onclick="Geom.gameEngine.run('nextLevel')" id="level-up-game">Следующий</button>
+          </p>
+          <div id="restart">
+            <p>Вы проиграли!</p>
+            <p>
+              <button type="button" onclick="Geom.gameEngine.restart()" id="restart-game">Заново</button>
+            </p>
+          </div>
+        </div>
+        <div class="ui-info-item right">
+          <p>Вера: <span id="faithLevel">0</span></p>
+          <p>До следующего уровня осталось накопить <span id="faithGoal">0</span> веры</p>
+          <div id="info"></div>
+        </div>
+      </div>
+      <div class="ui ui-control">
+        <div class="ui-control-group">
+          <button type="button" onclick="Geom.gameEngine.run('createFanatic')" title="Фанатик: Создать" class="ui-control-add ui-control-add-type_Fanatic">Фанатик<span class="ui-control-add-cost"><sup id="add-FanaticCost">0</sup></span><span class="ui-control-add-current_level"><small id="add-Fanatic-current_level" class="ui-control-add-current_level-value">1</small></span>
+          </button>
+          <button type="button" onclick="Geom.gameEngine.run('upgradeFanatic')" title="Фанатик: Улучшить" class="ui-control-upgrade">⏄<span id="upgrade-FanaticCost" class="ui-control-upgrade-cost">0</span></button>
+        </div>
+        <div class="ui-control-group">
+          <button type="button" onclick="Geom.gameEngine.run('createTemple')" title="Храм: Создать" class="ui-control-add ui-control-add-type_Temple">Храм<span class="ui-control-add-cost"><sup id="add-TempleCost">0</sup></span><span class="ui-control-add-current_level"><small id="add-Temple-current_level" class="ui-control-add-current_level-value">1</small></span>
+          </button>
+          <button type="button" onclick="Geom.gameEngine.run('upgradeTemple')" title="Храм: Улучшить" class="ui-control-upgrade">⏄<span id="upgrade-TempleCost" class="ui-control-upgrade-cost">0</span></button>
+        </div>
+        <div class="ui-control-group">
+          <button type="button" onclick="Geom.gameEngine.run('createHoly')" title="Святой: Создать" class="ui-control-add ui-control-add-type_Holy">Святой<span class="ui-control-add-cost"><sup id="add-HolyCost">0</sup></span><span class="ui-control-add-current_level"><small id="add-Holy-current_level" class="ui-control-add-current_level-value">1</small></span>
+          </button>
+          <button type="button" onclick="Geom.gameEngine.run('upgradeHoly')" title="Святой: Улучшить" class="ui-control-upgrade">⏄<span id="upgrade-HolyCost" class="ui-control-upgrade-cost">0</span></button>
+        </div>
+        <button type="button" onclick="Geom.gameEngine.run('slower')" class="ui-control-speed-slower">← Медленнее</button>
+        <button type="button" onclick="Geom.gameEngine.run('faster')" class="ui-control-speed-faster">Быстрее →</button>
+      </div>
+    </div>
+    <script src="music.js"></script>
+    <canvas id="game"></canvas>
+  </body>
+</html>
