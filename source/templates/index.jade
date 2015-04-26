@@ -11,7 +11,14 @@ html
 	body
 		.ui-container
 			.ui.ui-info
-				.ui-info-item.left Уровень #[span#level 0]
+				.ui-info-item.left
+					p Уровень #[span#level 0]
+					p#level-up
+						button(type="button")#level-up-game Следующий
+					#restart
+						p Вы проиграли!
+						p
+							button(type="button")#restart-game Заново
 				.ui-info-item.right
 					p Вера: #[span#faithLevel 0]
 					p До следующего уровня осталось накопить #[span#faithGoal 0] веры
