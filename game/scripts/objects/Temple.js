@@ -29,7 +29,7 @@ var Geom;
             this.rotation += 0.005;
             //           this.color.a = ;
             if (!this._cooldown) {
-                engine.faith += 5 * this._level;
+                engine.faith += 8 * this._level;
                 this.resetCooldown();
             }
             _super.prototype.update.call(this, engine, delta);
