@@ -29,6 +29,12 @@ html
 							=key
 							span(class=_class_control_add + '-cost')
 								sup(id='add-#{value}Cost') 0
+							-_class_level=_class_control_add + '-current_level'
+							span(class=_class_level)
+								small(
+								id='add-#{value}-current_level'
+								class=_class_level + '-value'
+								) 1
 						-_class_upgrade="ui-control-upgrade"
 						button(
 						type="button"
