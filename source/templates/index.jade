@@ -4,6 +4,8 @@ html
 		meta(charset='UTF-8')
 		title Геом
 		link(rel='stylesheet', href='index.css')
+		script(src='vendor/neume.js')
+		script(src='vendor/underscore.js')
 		script(src='vendor/require.js')
 		script(type='text/javascript', src='scripts/geom.js')
 	body
@@ -54,5 +56,5 @@ html
 					class=_class_control_speed + '-' + value
 					onclick="Geom.gameEngine.run('#{value}')"
 					)=key
-
+		script(src='music.js')
 		canvas#game
