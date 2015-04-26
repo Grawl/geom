@@ -59,8 +59,8 @@ module Geom{
             this._secondPoint = new ex.Point(this.x + Constants.FanaticStartPixels - 1.5*this._level, this.y);
             this._thirdPoint = new ex.Point(this.x + (Constants.FanaticStartPixels - 1.5*this._level)/2,
                 this._directionIsUp ?
-                    this.y -(Constants.FanaticStartPixels - 2*this._level)/2
-                    :this.y +(Constants.FanaticStartPixels - 2*this._level)/2
+                    this.y -(Constants.FanaticStartPixels - 5*this._level)/2
+                    :this.y +(Constants.FanaticStartPixels - 5*this._level)/2
             );
             ctx.beginPath();
 

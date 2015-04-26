@@ -38,11 +38,11 @@ module Geom{
 
         public static MaxAtheistSize = 50;
 
-        public static AtheistBaseCooldown = 300;
+        public static AtheistBaseCooldown = 200;
 
-        public static TempleWeight = 50;
+        public static TempleWeight = 30;
         public static FanaticWeight = 10;
-        public static HolyWeight = 100;
+        public static HolyWeight = 50;
 
         public static FanaticShootSpeed = 300;
     }

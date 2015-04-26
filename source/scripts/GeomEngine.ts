@@ -50,6 +50,12 @@ module Geom {
                 _.sum(_.filter(this.rootScene.children, ch => ch instanceof Fanatic), fn => fn._level * Constants.FanaticWeight)
                 - _.sum(_.filter(this.rootScene.children, ch => ch instanceof Temple), fn => fn._level * Constants.TempleWeight)
                 - _.sum(_.filter(this.rootScene.children, ch => ch instanceof Holy), fn => fn._level * Constants.HolyWeight);
+
+            if (this._atheistCooldown<=0)
+            {
+                this._atheistCooldown=60;
+            }
+
         }
 
         changeAtheistCooldown(type:HolyObjects) {
@@ -195,5 +201,33 @@ module Geom {
 
             return new ex.Point((minX + maxX)/2, (minY + maxY)/ 2);
         }
+
+        public upgradeTemple(){
+           if (this.faith>=Constants.TempleFaithUpgradeCost)
+           {
+               this.templeLevel++;
+               this.faith-=Constants.TempleFaithUpgradeCost;
+               this.changeAtheistCooldown(HolyObjects.Temple);
+           }
+        }
+
+        public upgradeFanatic(){
+            if (this.faith>=Constants.FanaticFaithUpgradeCost)
+            {
+                this.fanaticLevel++;
+                this.faith-=Constants.FanaticFaithUpgradeCost;
+                this.changeAtheistCooldown(HolyObjects.Fanatic);
+            }
+        }
+
+        public upgradeHoly(){
+            if (this.faith>=Constants.HolyFaithUpgradeCost)
+            {
+                this.holyLevel++;
+                this.faith-=Constants.HolyFaithUpgradeCost;
+                this.changeAtheistCooldown(HolyObjects.Holy);
+            }
+        }
+
     }
 }
