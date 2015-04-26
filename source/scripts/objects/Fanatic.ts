@@ -94,7 +94,7 @@ module Geom{
             if (this.pointIsFree(this.x,this.y,engine.rootScene))
             {
                 engine.addChild(new FanaticShoot(this.x, this.y, ex.Side.Left));
-                engine.faith -= 1;
+				engine.faith -= 1;
             }
 
             // Из второй точки вправо

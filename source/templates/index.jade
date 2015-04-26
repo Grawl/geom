@@ -21,7 +21,8 @@ html
 							button(type="button")#restart-game Заново
 				.ui-info-item.right
 					p Вера: #[span#faithLevel 0]
-					p Враги повсюду
+					p До следующего уровня осталось накопить #[span#faithGoal 0] веры
+					#info
 			.ui.ui-control
 				each key, value in {Fanatic: 'Фанатик', Temple: 'Храм', Holy: 'Святой'}
 					.ui-control-group

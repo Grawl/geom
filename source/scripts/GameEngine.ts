@@ -8,8 +8,7 @@ module Geom{
         private _engine:GeomEngine;
 
         constructor(){
-            this._engine = new GeomEngine(800, 600, "game");
-			this._engine.backgroundColor = ex.Color.fromHex('#0F0F0F');
+			this.restart();
         }
 
         public initialize(){
@@ -23,6 +22,11 @@ module Geom{
         run(functionName:string){
             this._engine[functionName]();
         }
+
+		restart(){
+			this._engine = new GeomEngine(800, 600, "game");
+			this._engine.backgroundColor = ex.Color.fromHex('#0F0F0F');
+		}
 
         private initializeBuildingEvents(){
             this._engine.on('keydown', (event:any)=>{
