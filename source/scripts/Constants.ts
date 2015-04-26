@@ -25,6 +25,10 @@ module Geom{
         public static FanaticFaithCost = 15;
         public static HolyFaithCost = 60;
 
+		public static TempleFaithUpgradeCost = Constants.TempleFaithCost * 4;
+		public static FanaticFaithUpgradeCost = Constants.FanaticFaithCost * 4;
+		public static HolyFaithUpgradeCost = Constants.HolyFaithCost * 4;
+
         public static StartFaith = 45;
 
         public static TempleCooldown = 120;
