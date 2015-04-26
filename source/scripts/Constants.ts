@@ -6,7 +6,7 @@ module Geom{
 
         public static FanaticHp = 1;
         public static FanaticStartPixels = 30;
-        public static FanaticPixelsPerLevel = 30;
+        public static FanaticPixelsPerLevel = 5;
         // 2 секунды == 120 ФПС
         public static FanaticStartShootCooldownInFPS = 240;
         public static FanaticShootCooldownReductionPerLevelInFPS = 12;
@@ -40,6 +40,8 @@ module Geom{
         public static MaxAtheistSize = 50;
 
         public static AtheistBaseCooldown = 200;
+        public static AtheistMinCooldown = 60;
+        public static AtheistMinCooldownReductionPerGameLevel = 5;
 
         public static TempleWeight = 30;
         public static FanaticWeight = 10;

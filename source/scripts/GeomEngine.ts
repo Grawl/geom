@@ -80,7 +80,7 @@ module Geom {
 
             if (this._atheistCooldown<=0)
             {
-                this._atheistCooldown=60;
+                this._atheistCooldown=Constants.AtheistMinCooldown - this.gameLevel*Constants.AtheistMinCooldownReductionPerGameLevel;
             }
 
         }
