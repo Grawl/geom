@@ -7,6 +7,8 @@ module Geom{
         _secondPoint:ex.Point;
         _thirdPoint:ex.Point;
         _cooldown:number;
+        _directionIsUp:boolean;
+
 
         constructor(private _level:number, startX:number, startY:number){
             super(startX, startY, Constants.FanaticStartPixels - 1.5 * _level, Constants.FanaticStartPixels - 1.5*_level, Constants.FanaticColor);
@@ -15,11 +17,17 @@ module Geom{
 
 //            this.setDrawing('triangle');
 //            this.setRandomRotation();
+            this._directionIsUp = Math.floor(Math.random() * 100)%2 == 1;
+
 
             this.collisionType = ex.CollisionType.Passive;
 
             this._secondPoint = new ex.Point(this.x + Constants.FanaticStartPixels - 1.5*this._level, this.y);
-            this._thirdPoint = new ex.Point(this.x + (Constants.FanaticStartPixels - 1.5*this._level)/2, this.y - (Constants.FanaticStartPixels - 1.5*this._level)/2);
+            this._thirdPoint = new ex.Point(this.x + (Constants.FanaticStartPixels - 1.5*this._level)/2,
+                    this._directionIsUp ?
+                        this.y -(Constants.FanaticStartPixels - 2*this._level)/2
+                    :this.y +(Constants.FanaticStartPixels - 2*this._level)/2
+                );
 
             this.resetCooldown();
             this.addCollisionGroup('godObjects');
@@ -49,8 +57,11 @@ module Geom{
         public draw(ctx: CanvasRenderingContext2D, delta: number){
             ctx.fillStyle = this.color.toString();
             this._secondPoint = new ex.Point(this.x + Constants.FanaticStartPixels - 1.5*this._level, this.y);
-            this._thirdPoint = new ex.Point(this.x + (Constants.FanaticStartPixels - 1.5*this._level)/2, this.y - (Constants.FanaticStartPixels - 1.5*this._level)/2);
-
+            this._thirdPoint = new ex.Point(this.x + (Constants.FanaticStartPixels - 1.5*this._level)/2,
+                this._directionIsUp ?
+                    this.y -(Constants.FanaticStartPixels - 2*this._level)/2
+                    :this.y +(Constants.FanaticStartPixels - 2*this._level)/2
+            );
             ctx.beginPath();
 
             ctx.moveTo(this.x, this.y);
@@ -92,10 +103,11 @@ module Geom{
                 engine.addChild(new FanaticShoot(this._secondPoint.x, this._secondPoint.y, ex.Side.Right));
                 engine.faith -= 1;
             }
-            // Из третьей точки вверх
+            // Из третьей точки вверх или вниз
             if (this.pointIsFree(this._thirdPoint.x,this._thirdPoint.y,engine.rootScene))
             {
-                engine.addChild(new FanaticShoot(this._thirdPoint.x, this._thirdPoint.y, ex.Side.Top));
+                engine.addChild(new FanaticShoot(this._thirdPoint.x, this._thirdPoint.y,
+                    this._directionIsUp? ex.Side.Top : ex.Side.Bottom));
                 engine.faith -= 1;
             }
 

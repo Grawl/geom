@@ -18,6 +18,9 @@ module Geom{
                 case ex.Side.Top:
                     this.dy = -Constants.FanaticShootSpeed;
                     break;
+                case ex.Side.Bottom:
+                    this.dy = Constants.FanaticShootSpeed;
+                    break;
             }
 
             this.addCollisionGroup('godObjects');
