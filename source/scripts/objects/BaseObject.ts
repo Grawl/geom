@@ -25,8 +25,5 @@ module Geom{
             super.update(engine, delta);
         }
 
-        public displayHpBar(){
-
-        }
     }
 }

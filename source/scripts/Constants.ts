@@ -6,6 +6,7 @@ module Geom{
 
         public static FanaticHp = 1;
         public static FanaticStartPixels = 30;
+        public static FanaticPixelsPerLevel = 30;
         // 2 секунды == 120 ФПС
         public static FanaticStartShootCooldownInFPS = 240;
         public static FanaticShootCooldownReductionPerLevelInFPS = 12;

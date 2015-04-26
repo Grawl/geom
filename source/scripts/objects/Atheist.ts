@@ -30,11 +30,8 @@ module Geom{
 
             this.onCollidesWith('godObjects', (actor:BaseObject) => {
                 actor._health--;
-                if (actor._health > 0)
+                if (!actor._health)
                 {
-                   actor.displayHpBar();
-                }
-                else{
                     actor.kill();
                 }
                 this.die();

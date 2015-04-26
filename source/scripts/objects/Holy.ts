@@ -5,7 +5,7 @@ module Geom{
     export class Holy extends Geom.BaseObject{
         _cooldown:number;
 
-        constructor(private _level:number, startX:number, startY:number){
+        constructor(public _level:number, startX:number, startY:number){
             super(startX, startY,
                     Constants.HolyStartPixels + (_level-1) * Constants.HolyPixelsPerLevel,
                     Constants.HolyStartPixels + (_level-1) * Constants.HolyPixelsPerLevel
@@ -34,6 +34,7 @@ module Geom{
         public update(engine:GeomEngine, delta:number){
             this._cooldown--;
 
+            this.color.a = this._health / (this._level * Constants.HolyHpPerLevel);
             if (!this._cooldown)
             {
                 engine.faith+=2*this._level;
