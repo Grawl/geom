@@ -25,6 +25,13 @@ module Geom {
 
             this.on('update', e => {
                 this.setLabelsInformation();
+				if (this.checkLoseConditions())
+				{
+				    this.stop();
+				}
+
+
+
 
                 if (this._atheistCooldown <= 0) {
                     this.addChild(new Atheist(this.getWidth(), this.getHeight()));
@@ -44,6 +51,26 @@ module Geom {
             this.on('createFanatic', e => this.createFanatic());
             this.on('createHoly', e => this.createHoly());
         }
+
+		checkLoseConditions(){
+			// Если количество веры упало ниже нуля, то проигрыш
+			if (this.faith<0)
+			{
+			    return true;
+			}
+			// Если денег не хватает ни на одну из фигур, и фигур на поле нет, то проигрыш
+
+			var holyLength = _.filter(this.rootScene.children, ch => ch instanceof Temple || ch instanceof Fanatic || ch instanceof Holy).length;
+
+			if (holyLength)
+			{
+			    return false;
+			}
+
+			return this.faith < this.getFanaticFaithCost()
+				&& this.faith < this.getTempleFaithCost()
+				&& this.faith < this.getHolyFaithCost();
+		}
 
         setLabelsInformation(){
             this.setText("faithLevel", this.faith.toFixed(2));
