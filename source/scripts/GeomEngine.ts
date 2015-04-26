@@ -27,8 +27,18 @@ module Geom {
                 this.setLabelsInformation();
 				if (this.checkLoseConditions())
 				{
-				    this.stop();
+					for(var i=0;i<this.rootScene.children.length;i++){
+						this.rootScene.children[i].kill();
+					}
 					this.showLoseLabel();
+				}
+
+				if (this.getFaithGoal() - this.faith <=0)
+				{
+				  document.getElementById("level-up-game").className="";
+				}
+				else{
+					document.getElementById("level-up-game").className="hidden";
 				}
 
 				if (this.checkWinConditions()) {
@@ -70,7 +80,7 @@ module Geom {
         }
 
 		showLoseLabel(){
-
+			document.getElementById("restart").className="";
 		}
 
 		showWinLabel(){
@@ -103,7 +113,9 @@ module Geom {
 
         setLabelsInformation(){
             this.setText("faithLevel", this.faith.toFixed(2));
-            this.setText("faithGoal", (this.getFaithGoal() - this.faith).toFixed(2));
+			var goal = (this.getFaithGoal() - this.faith);
+
+            this.setText("faithGoal", goal<0?0:(this.getFaithGoal() - this.faith).toFixed(2));
 
 
 
@@ -325,6 +337,7 @@ module Geom {
 		}
 
         public reset() {
+			document.getElementById("restart").className="hidden";
             this.faith = Constants.StartFaith;
 			this.templeLevel = 1;
 			this.fanaticLevel = 1;
