@@ -1,4 +1,5 @@
-_.mixin(neume._.exports());
+var underscore = _.noConflict();
+underscore.mixin(neume._.exports());
 var neu = neume();
 var sheets = null;
 var chords = [
@@ -7,17 +8,12 @@ var chords = [
 	[86, 71, 67, 66, 59],
 	[88, 71, 67, 64, 59],
 ];
-var famiCurve = new Float32Array(_.range(64).map(function (x) {
+var famiCurve = new Float32Array(underscore.range(64).map(function (x) {
 	return ((x >> 3) / 4) - 1;
 }));
 var synthDefs = [];
 synthDefs[0] = function ($, beat, bar, index) {
-	var freq = _(chords);
-	freq = _(chords).chain();
-	freq = _(chords).chain().wrapAt(bar);
-	freq = _(chords).chain().wrapAt(bar).at(index);
-	freq = _(chords).chain().wrapAt(bar).at(index).midicps();
-	freq = _(chords).chain().wrapAt(bar).at(index).midicps().value();
+	var freq = underscore(chords).chain().wrapAt(bar).at(index).midicps().value();
 	return $("tri", {freq: freq})
 		.$("shaper", {curve: famiCurve})
 		.$("line", {start: 0.125, dur: "16n"}).on("end", $.stop)
@@ -28,15 +24,15 @@ synthDefs[2] = synthDefs[0];
 synthDefs[3] = synthDefs[0];
 synthDefs[4] = synthDefs[0];
 synthDefs[5] = function ($, beat) {
-	var amp = _.wrapAt([0.1, 0.075, 0.15, 0.05], beat);
+	var amp = underscore.wrapAt([0.1, 0.075, 0.15, 0.05], beat);
 	return $("white")
 		.$("hpf", {freq: 12000, Q: 4})
 		.$("xline", {start: amp, dur: "32n"}).on("end", $.stop)
 		.$("out", {bus: 2});
 };
 synthDefs[6] = function ($, beat) {
-	var amp = _.wrapAt([0.3, 0.1, 0.2, 0.2], beat);
-	var dur = _.wrapAt(["2n", "8n", "4n", "8n"], beat);
+	var amp = underscore.wrapAt([0.3, 0.1, 0.2, 0.2], beat);
+	var dur = underscore.wrapAt(["2n", "8n", "4n", "8n"], beat);
 	return $("pink")
 		.$("shaper", {curve: 1, mul: 0.075})
 		.$("lpf", {freq: 2800, Q: 8.5})
@@ -99,27 +95,27 @@ window.onload = function () {
 		randomCompose();
 	}, 5 * 1000);
 	//$("clear").onclick = function () {
-	//	sheets = _.range(32).map(function () {
+	//	sheets = underscore.range(32).map(function () {
 	//		return [0, 0, 0, 0, 0, 0, 0, 0];
 	//	});
 	//};
 	var wrapAtCoin = function (list, index) {
-		return _.coin(_.wrapAt(list, index)) ? 1 : 0;
+		return underscore.coin(underscore.wrapAt(list, index)) ? 1 : 0;
 	};
 	function randomCompose() {
-		sheets = _.range(32).map(function (i) {
+		sheets = underscore.range(32).map(function (i) {
 			var sheet = [0, 0, 0, 0, 0, 0, 0, 0];
 			if (wrapAtCoin([0.975, 0.7, 0.9, 0.7], i)) {
 				sheet[5] = wrapAtCoin([0.8, 0.4, 0.6, 0.4, 0.8, 0.4, 0.6, 0.6], i);
 				sheet[6] = wrapAtCoin([0.2, 0.2, 0.5, 0.4, 0.8, 0.2, 0.5, 0.4], i);
 				sheet[7] = wrapAtCoin([0.8, 0.2, 0.4, 0.3, 0.4, 0.3, 0.6, 0.4], i);
 				if (wrapAtCoin([0.75, 0.1, 0.25, 0.05], i)) {
-					_.range(5).forEach(function (j) {
-						sheet[j] = _.coin(0.5) ? 1 : 0;
+					underscore.range(5).forEach(function (j) {
+						sheet[j] = underscore.coin(0.5) ? 1 : 0;
 					});
 				} else {
-					if (_.coin(0.75)) {
-						sheet[_.sample(_.range(5))] = 1;
+					if (underscore.coin(0.75)) {
+						sheet[underscore.sample(underscore.range(5))] = 1;
 					}
 				}
 			}
@@ -129,8 +125,8 @@ window.onload = function () {
 		sheets[0][7] = 1;
 	}
 	function load(hash) {
-		sheets = _.range(32).map(function (i) {
-			return _.range(8).map(_.partial(function (num, index) {
+		sheets = underscore.range(32).map(function (i) {
+			return underscore.range(8).map(underscore.partial(function (num, index) {
 				return num & (1 << index) ? 1 : 0;
 			}, +("0x" + hash.substr(i * 2, 2))));
 		});
