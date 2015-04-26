@@ -21,16 +21,17 @@ $row-height: 60px
 		text-align: center
 		vertical-align: middle
 		background: linear-gradient(to right, hsla(0, 0%, 100%, 0), hsla(0, 0%, 100%, 0.15))
-		&-add
+		&-group
 			display: inline-block
+			&:not(:last-of-type)
+				margin-right: 0.75em
+		&-add
 			font:
 				family: $font-sans-condenced
 				size: 20pt
 			color: white
 			border: 0
 			padding: 0.1em
-			&:not(:last-of-type)
-				margin-right: 0.75em
 			background: transparent
 			position: relative
 			cursor: pointer
@@ -67,6 +68,12 @@ $row-height: 60px
 						height: $size
 						border-radius: $size
 						background-color: hsl(177, 96%, 37%)
+		&-upgrade
+			background-color: black
+			color: white
+			border: 0
+			&-cost
+				margin-left: 0.5em
 		&-speed
 			&-slower
 				@extend %control-speed
