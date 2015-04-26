@@ -6,7 +6,7 @@ module Geom{
        _cooldown:number;
 
 
-       constructor(private _level:number, startX:number, startY:number){
+       constructor(public _level:number, startX:number, startY:number){
           super(startX, startY, (_level - 1)*Constants.TemplePixelsPerLevel+ Constants.TempleStartPixels,
                   (_level - 1)*Constants.TemplePixelsPerLevel+ Constants.TempleStartPixels);
 		   this.color = Constants.TempleColor;
@@ -25,6 +25,7 @@ module Geom{
 
        public update(engine:GeomEngine, delta:number){
            this._cooldown--;
+           this.color.a = this._health / (this._level * Constants.TempleHpPerLevel);
 
            if (!this._cooldown)
            {

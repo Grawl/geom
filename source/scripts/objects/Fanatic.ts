@@ -10,8 +10,8 @@ module Geom{
         _directionIsUp:boolean;
 
 
-        constructor(private _level:number, startX:number, startY:number){
-            super(startX, startY, Constants.FanaticStartPixels - 1.5 * _level, Constants.FanaticStartPixels - 1.5*_level, Constants.FanaticColor);
+        constructor(public _level:number, startX:number, startY:number){
+            super(startX, startY, Constants.FanaticStartPixels - Constants.FanaticPixelsPerLevel * _level, Constants.FanaticStartPixels - Constants.FanaticPixelsPerLevel*_level, Constants.FanaticColor);
             this._health = 1;
 //            this.addDrawing('triangle',this.getTriangle());
 
@@ -22,11 +22,11 @@ module Geom{
 
             this.collisionType = ex.CollisionType.Passive;
 
-            this._secondPoint = new ex.Point(this.x + Constants.FanaticStartPixels - 1.5*this._level, this.y);
-            this._thirdPoint = new ex.Point(this.x + (Constants.FanaticStartPixels - 1.5*this._level)/2,
+            this._secondPoint = new ex.Point(this.x + Constants.FanaticStartPixels - Constants.FanaticPixelsPerLevel*this._level, this.y);
+            this._thirdPoint = new ex.Point(this.x + (Constants.FanaticStartPixels - Constants.FanaticPixelsPerLevel*this._level)/2,
                     this._directionIsUp ?
-                        this.y -(Constants.FanaticStartPixels - 2*this._level)/2
-                    :this.y +(Constants.FanaticStartPixels - 2*this._level)/2
+                        this.y -(Constants.FanaticStartPixels - Constants.FanaticPixelsPerLevel*this._level)/2
+                    :this.y +(Constants.FanaticStartPixels - Constants.FanaticPixelsPerLevel*this._level)/2
                 );
 
             this.resetCooldown();
@@ -56,11 +56,11 @@ module Geom{
 
         public draw(ctx: CanvasRenderingContext2D, delta: number){
             ctx.fillStyle = this.color.toString();
-            this._secondPoint = new ex.Point(this.x + Constants.FanaticStartPixels - 1.5*this._level, this.y);
-            this._thirdPoint = new ex.Point(this.x + (Constants.FanaticStartPixels - 1.5*this._level)/2,
+            this._secondPoint = new ex.Point(this.x + Constants.FanaticStartPixels - Constants.FanaticPixelsPerLevel*this._level, this.y);
+            this._thirdPoint = new ex.Point(this.x + (Constants.FanaticStartPixels - Constants.FanaticPixelsPerLevel*this._level)/2,
                 this._directionIsUp ?
-                    this.y -(Constants.FanaticStartPixels - 2*this._level)/2
-                    :this.y +(Constants.FanaticStartPixels - 2*this._level)/2
+                    this.y -(Constants.FanaticStartPixels - Constants.FanaticPixelsPerLevel*this._level)/2
+                    :this.y +(Constants.FanaticStartPixels - Constants.FanaticPixelsPerLevel*this._level)/2
             );
             ctx.beginPath();
 

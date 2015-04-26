@@ -48,11 +48,6 @@ html
 							class=_class_upgrade + '-cost'
 							id='upgrade-#{value}Cost'
 							) 0
-						script.
-							setTimeout(function () {
-								document.getElementById('add-#{value}Cost').innerHTML = Geom.Constants.#{value}FaithCost;
-								document.getElementById('upgrade-#{value}Cost').innerHTML = Geom.Constants.#{value}FaithUpgradeCost;
-							}, 2000);
 				-var _class_control_speed='ui-control-speed'
 				each key, value in {slower: '← Медленнее', faster: 'Быстрее →'}
 					button(
@@ -61,3 +56,4 @@ html
 					onclick="Geom.gameEngine.run('#{value}')"
 					)=key
 		script(src='music.js')
+		canvas#game

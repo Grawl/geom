@@ -14,15 +14,17 @@ module Geom {
         public angleSpeed = 0.1;
         public speed = 30;
 
-        constructor(width, height) {
-            super(width, height);
+        public gameLevel = 1;
+
+        constructor(width, height, canvasId) {
+            super(width, height, canvasId);
 
             this.resetFaith();
 
             this.resetAtheistCooldown();
 
             this.on('update', e => {
-                document.getElementById("faithLevel").textContent = this.faith.toFixed(2);
+                this.setLabelsInformation();
 
                 if (this._atheistCooldown <= 0) {
                     this.addChild(new Atheist(this.getWidth(), this.getHeight()));
@@ -43,6 +45,31 @@ module Geom {
             this.on('createHoly', e => this.createHoly());
         }
 
+        setLabelsInformation(){
+            this.setText("faithLevel", this.faith.toFixed(2));
+
+            this.setText("upgrade-FanaticCost", this.fanaticLevel * Constants.FanaticFaithUpgradeCost);
+            this.setText("upgrade-TempleCost", this.templeLevel * Constants.TempleFaithUpgradeCost);
+            this.setText("upgrade-HolyCost", this.holyLevel * Constants.HolyFaithUpgradeCost);
+
+            this.setText("add-Fanatic-current_level", this.fanaticLevel);
+            this.setText("add-Temple-current_level", this.templeLevel);
+            this.setText("add-Holy-current_level", this.holyLevel);
+
+            this.setText("add-FanaticCost", this.fanaticLevel * Constants.FanaticFaithCost);
+            this.setText("add-TempleCost", this.templeLevel * Constants.TempleFaithCost);
+            this.setText("add-HolyCost", this.holyLevel * Constants.HolyFaithCost);
+
+            this.setText("level", this.gameLevel);
+
+            // update canvas class в зависимости от уровня игры
+            document.getElementById("game").className = "level-"+this.gameLevel;
+        }
+
+        setText(id:string, text:any){
+            document.getElementById(id).textContent = text;
+        }
+
         resetAtheistCooldown() {
             // В зависимости от количества и качества фигур увеличивается количество и размер атеистов
             // Кулдаун увеличивается, чем больше фанатиков, но уменьшается, чем больше храмов и святых
@@ -50,6 +77,12 @@ module Geom {
                 _.sum(_.filter(this.rootScene.children, ch => ch instanceof Fanatic), fn => fn._level * Constants.FanaticWeight)
                 - _.sum(_.filter(this.rootScene.children, ch => ch instanceof Temple), fn => fn._level * Constants.TempleWeight)
                 - _.sum(_.filter(this.rootScene.children, ch => ch instanceof Holy), fn => fn._level * Constants.HolyWeight);
+
+            if (this._atheistCooldown<=0)
+            {
+                this._atheistCooldown=Constants.AtheistMinCooldown - this.gameLevel*Constants.AtheistMinCooldownReductionPerGameLevel;
+            }
+
         }
 
         changeAtheistCooldown(type:HolyObjects) {
@@ -131,28 +164,28 @@ module Geom {
 
         createTemple() {
             this.getNextStartPoint();
-            if (this.faith >= Constants.TempleFaithCost) {
+            if (this.faith >= Constants.TempleFaithCost * this.templeLevel) {
                 this.addChild(new Temple(this.templeLevel, this._startPoint.x, this._startPoint.y));
-                this.faith -= Constants.TempleFaithCost;
+                this.faith -= Constants.TempleFaithCost * this.templeLevel;
                 this.changeAtheistCooldown(HolyObjects.Temple);
             }
         }
 
         createFanatic() {
             this.getNextStartPoint();
-            if (this.faith >= Constants.FanaticFaithCost && this.getFanaticLimit() > 0) {
+            if (this.faith >= Constants.FanaticFaithCost * this.fanaticLevel && this.getFanaticLimit() > 0) {
                 this.addChild(new Fanatic(this.fanaticLevel, this._startPoint.x, this._startPoint.y));
-                this.faith -= Constants.FanaticFaithCost;
+                this.faith -= Constants.FanaticFaithCost * this.fanaticLevel;
                 this.changeAtheistCooldown(HolyObjects.Fanatic);
             }
         }
 
         createHoly(){
             this.getNextStartPoint();
-            if (this.faith>=Constants.HolyFaithCost && this.getHolyLimit() > 0)
+            if (this.faith>=Constants.HolyFaithCost*this.holyLevel && this.getHolyLimit() > 0)
             {
                 this.addChild(new Holy(this.holyLevel, this._startPoint.x, this._startPoint.y));
-                this.faith-=Constants.HolyFaithCost;
+                this.faith-=Constants.HolyFaithCost*this.holyLevel;
                 this.changeAtheistCooldown(HolyObjects.Holy);
             }
         }
@@ -195,5 +228,33 @@ module Geom {
 
             return new ex.Point((minX + maxX)/2, (minY + maxY)/ 2);
         }
+
+        public upgradeTemple(){
+           if (this.faith>=Constants.TempleFaithUpgradeCost)
+           {
+               this.templeLevel++;
+               this.faith-=Constants.TempleFaithUpgradeCost;
+               this.changeAtheistCooldown(HolyObjects.Temple);
+           }
+        }
+
+        public upgradeFanatic(){
+            if (this.faith>=Constants.FanaticFaithUpgradeCost)
+            {
+                this.fanaticLevel++;
+                this.faith-=Constants.FanaticFaithUpgradeCost;
+                this.changeAtheistCooldown(HolyObjects.Fanatic);
+            }
+        }
+
+        public upgradeHoly(){
+            if (this.faith>=Constants.HolyFaithUpgradeCost)
+            {
+                this.holyLevel++;
+                this.faith-=Constants.HolyFaithUpgradeCost;
+                this.changeAtheistCooldown(HolyObjects.Holy);
+            }
+        }
+
     }
 }
