@@ -8,6 +8,7 @@ module Geom {
         public fanaticLevel = 1;
         public holyLevel = 1;
         private _atheistCooldown:number = 0;
+        private _raidCooldown:number = 0;
 
         private _startPoint=null;
         public angle = 0;
@@ -31,18 +32,29 @@ module Geom {
 					this.showLoseLabel();
 				}
 
-				if (this.checkWinConditions())
-				{
-				    this.stop();
+				if (this.checkWinConditions()) {
+					this.stop();
 					this.showWinLabel();
 				}
 
+				// Набег может происходить не чаще чем раз в 10 секунд
+				if (this.checkRaidConditions())
+				{
+					console.log('raid');
+					this._raidCooldown--;
+					if (this._raidCooldown<=0)
+					{
+						for(var i=0;i<Constants.RaidAtheistCountPerLevel * this.gameLevel;i++){
+							this.addChild(new Atheist(this.getWidth(), this.getHeight()));
+						}
+						this._raidCooldown = Constants.RaidCooldown - (this.gameLevel - 1)* Constants.RaidCooldownReductionPerLevel;
+					}
 
-
-                if (this._atheistCooldown <= 0) {
-                    this.addChild(new Atheist(this.getWidth(), this.getHeight()));
-                    this.resetAtheistCooldown();
-                }
+				}
+				if (this._atheistCooldown <= 0) {
+					this.addChild(new Atheist(this.getWidth(), this.getHeight()));
+					this.resetAtheistCooldown();
+				}
 
                 this._atheistCooldown--;
                 this.angle+=this.angleSpeed;
@@ -56,6 +68,8 @@ module Geom {
             this.on('createTemple', e => this.createTemple());
             this.on('createFanatic', e => this.createFanatic());
             this.on('createHoly', e => this.createHoly());
+			this.createTemple();
+			this.createFanatic();
         }
 
 		showLoseLabel(){
@@ -93,6 +107,8 @@ module Geom {
         setLabelsInformation(){
             this.setText("faithLevel", this.faith.toFixed(2));
             this.setText("faithGoal", (this.getFaithGoal() - this.faith).toFixed(2));
+
+
 
             this.setText("upgrade-FanaticCost", this.fanaticLevel * Constants.FanaticFaithUpgradeCost);
             this.setText("upgrade-TempleCost", this.templeLevel * Constants.TempleFaithUpgradeCost);
@@ -172,8 +188,27 @@ module Geom {
             {
                 this._atheistCooldown=Constants.AtheistMinCooldown - this.gameLevel*Constants.AtheistMinCooldownReductionPerGameLevel;
             }
-
         }
+
+		checkRaidConditions(){
+			var templeLength = _.filter(this.rootScene.children, ch => ch instanceof Temple).length;
+			var fanaticLength = _.filter(this.rootScene.children, ch => ch instanceof Fanatic).length;
+			var holyLength = _.filter(this.rootScene.children, ch => ch instanceof Holy).length;
+			if (templeLength>2 &&  fanaticLength/templeLength < 0.5)
+			{
+				return true;
+			}
+
+			return templeLength > 4 && holyLength / templeLength < 0.25;
+
+
+			// Если не сбалансировано количество фанатиков-храмов-святых, то происходит набег (обнуление кулдауна)
+			// Условия следующие:
+			// 1. 1 фанатик на 2 храма
+			// 2. 1 святой на 4 храма
+			// 3. появляется 10 * уровень игры атеистов
+			// 4.
+		}
 
         changeAtheistCooldown(type:HolyObjects) {
             switch (type) {

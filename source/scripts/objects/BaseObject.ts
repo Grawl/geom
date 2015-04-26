@@ -19,8 +19,16 @@ module Geom{
                 {
                     radius *= 0.5;
                 }
+				var x = centerPoint.x + radius * Math.cos(engine.angle);
+				var y = centerPoint.y + radius * Math.sin(engine.angle);
+				if (x < 50 || x>= engine.getWidth()-50 || y <50 || y >= engine.getHeight()-50)
+				{
+					x = centerPoint.x + radius * Math.cos(engine.angle) * 0.3;
+					y = centerPoint.y + radius * Math.sin(engine.angle) * 0.3;
+				}
 
-                this.moveTo(centerPoint.x + radius * Math.cos(engine.angle), centerPoint.y + radius * Math.sin(engine.angle), engine.speed);
+
+                this.moveTo(x, y, engine.speed);
             }
 
             super.update(engine, delta);
