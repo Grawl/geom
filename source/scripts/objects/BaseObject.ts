@@ -10,6 +10,15 @@ module Geom{
 
         public update(engine:GeomEngine, delta:number){
             var centerPoint = engine.getCenterPoint();
+			if (centerPoint.x <= 50 || centerPoint.x <= engine.getWidth()-50)
+			{
+			     centerPoint.x = engine.getWidth()/2;
+			}
+			if (centerPoint.y <= 50 || centerPoint.y <= engine.getHeight()-50)
+			{
+				centerPoint.y = engine.getHeight()/2;
+			}
+
             var radius = Math.sqrt(Math.pow(this.x - centerPoint.x,2) + Math.pow(this.y - centerPoint.y,2)) * 5;
 
             if (radius)

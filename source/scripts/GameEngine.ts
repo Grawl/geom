@@ -8,7 +8,8 @@ module Geom{
         private _engine:GeomEngine;
 
         constructor(){
-			this.restart();
+			this._engine = new GeomEngine(800, 600, "game");
+			this._engine.backgroundColor = ex.Color.fromHex('#0F0F0F');
         }
 
         public initialize(){
@@ -24,8 +25,14 @@ module Geom{
         }
 
 		restart(){
-			this._engine = new GeomEngine(800, 600, "game");
-			this._engine.backgroundColor = ex.Color.fromHex('#0F0F0F');
+			this._engine.start();
+			var scene = this._engine.rootScene;
+
+			for(var i=0;i<scene.children.length;i++){
+				scene.children[i].kill();
+			}
+
+			this._engine.reset();
 		}
 
         private initializeBuildingEvents(){
@@ -42,13 +49,7 @@ module Geom{
 
                        break;
                    case ex.InputKey.C:
-                       var scene = this._engine.rootScene;
-
-                       for(var i=0;i<scene.children.length;i++){
-                           scene.children[i].die();
-                       }
-
-                       this._engine.resetFaith();
+					   this.restart();
                        break;
 
                    case ex.InputKey.Left:

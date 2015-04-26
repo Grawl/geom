@@ -14,11 +14,14 @@ html
 				.ui-info-item.left
 					p Уровень #[span#level 0]
 					p#level-up
-						button(type="button")#level-up-game Следующий
+						button(
+						type="button"
+						onclick="Geom.gameEngine.run('nextLevel')"
+						)#level-up-game Следующий
 					#restart
 						p Вы проиграли!
 						p
-							button(type="button")#restart-game Заново
+							button(type="button" onclick="Geom.gameEngine.restart()")#restart-game Заново
 				.ui-info-item.right
 					p Вера: #[span#faithLevel 0]
 					p До следующего уровня осталось накопить #[span#faithGoal 0] веры

@@ -20,9 +20,8 @@ module Geom {
         constructor(width, height, canvasId) {
             super(width, height, canvasId);
 
-            this.resetFaith();
+            this.reset();
 
-            this.resetAtheistCooldown();
 
             this.on('update', e => {
                 this.setLabelsInformation();
@@ -68,8 +67,6 @@ module Geom {
             this.on('createTemple', e => this.createTemple());
             this.on('createFanatic', e => this.createFanatic());
             this.on('createHoly', e => this.createHoly());
-			this.createTemple();
-			this.createFanatic();
         }
 
 		showLoseLabel(){
@@ -327,8 +324,24 @@ module Geom {
 			return Constants.HolyFaithCost + Constants.HolyFaithCostPerLevel * (this.holyLevel - 1);
 		}
 
-        public resetFaith() {
+        public reset() {
             this.faith = Constants.StartFaith;
+			this.templeLevel = 1;
+			this.fanaticLevel = 1;
+			this.holyLevel = 1;
+			this._atheistCooldown = 0;
+			this._raidCooldown = 0;
+
+			this._startPoint=null;
+			this.angle = 0;
+			this.angleSpeed = 0.1;
+			this.speed = 30;
+
+			this.gameLevel = 1;
+
+			this.resetAtheistCooldown();
+			this.createTemple();
+			this.createFanatic();
         }
 
         public hasTemple() {
