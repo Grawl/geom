@@ -25,7 +25,10 @@ module Geom{
 
        public update(engine:GeomEngine, delta:number){
            this._cooldown--;
-           this.color.a = this._health / (this._level * Constants.TempleHpPerLevel);
+		   this.color = new ex.Color(this.color.r,this.color.g,this.color.b,this._health / (this._level * Constants.TempleHpPerLevel));
+
+		   this.rotation+=0.005;
+//           this.color.a = ;
 
            if (!this._cooldown)
            {

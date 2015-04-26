@@ -53,7 +53,10 @@ module Geom{
 
         public static FanaticShootSpeed = 300;
 
-		public static StartFaithGoal = 300;
+		public static StartFaithGoal = 50;
+		public static RaidAtheistCountPerLevel = 10;
+		public static RaidCooldown = 500;
+		public static RaidCooldownReductionPerLevel = 50;
     }
 
 
